@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model BaseBracelet {
+  id             String   @id @default(cuid())
+  slug           String   @unique
+  name           String
+  svgPath        String
+  imageUrl       String?
+  lengthMm       Int
+  basePriceCents Int
+  active         Boolean  @default(true)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+  designs        Design[]
+
+  @@map("base_bracelets")
+}
+
+model Charm {
+  id             String        @id @default(cuid())
+  sku            String        @unique
+  name           String
+  priceCents     Int
+  widthMm        Float
+  heightMm       Float
+  anchorPoint    String        @default("center")
+  maxPerBracelet Int           @default(10)
+  stock          Int           @default(0)
+  active         Boolean       @default(true)
+  svg            String?
+  imageUrl       String?
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
+  designs        DesignCharm[]
+
+  @@map("charms")
+}
+
+model Design {
+  id            String        @id @default(cuid())
+  braceletId    String
+  subtotalCents Int
+  discountCents Int           @default(0)
+  totalCents    Int
+  currency      String        @default("EUR")
+  status        DesignStatus  @default(DRAFT)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  charms        DesignCharm[]
+  bracelet      BaseBracelet  @relation(fields: [braceletId], references: [id], onDelete: Cascade)
+
+  @@map("designs")
+}
+
+model DesignCharm {
+  id          String @id @default(cuid())
+  designId    String
+  charmId     String
+  t           Float
+  offsetMm    Float  @default(0)
+  rotationDeg Float  @default(0)
+  zIndex      Int    @default(0)
+  quantity    Int    @default(1)
+  charm       Charm  @relation(fields: [charmId], references: [id])
+  design      Design @relation(fields: [designId], references: [id], onDelete: Cascade)
+
+  @@map("design_charms")
+}
+
+enum DesignStatus {
+  DRAFT
+  ORDERED
+}

@@ -1,0 +1,52 @@
+<svg width="1000" height="300" viewBox="0 0 1000 300" xmlns="http://www.w3.org/2000/svg">
+  <!-- Modern Rose Gold Bracelet - Horizontal Line -->
+  <defs>
+    <!-- Rose gold gradient -->
+    <linearGradient id="roseGoldGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#fdf2f8;stop-opacity:1" />
+      <stop offset="25%" style="stop-color:#fce7f3;stop-opacity:1" />
+      <stop offset="75%" style="stop-color:#ec4899;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#be185d;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- Shadow filter -->
+    <filter id="braceletShadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="3" stdDeviation="2" flood-color="#00000030"/>
+    </filter>
+    
+    <!-- Modern geometric pattern -->
+    <pattern id="modernPattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <rect x="2" y="8" width="6" height="4" fill="white" opacity="0.3" rx="1"/>
+      <rect x="12" y="8" width="6" height="4" fill="white" opacity="0.2" rx="1"/>
+    </pattern>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1000" height="300" fill="#f8fafc"/>
+  
+  <!-- Modern bracelet - geometric horizontal line -->
+  <path d="M 100 135 L 300 130 L 500 140 L 700 135 L 900 140 L 900 160 L 700 155 L 500 165 L 300 160 L 100 165 Z" 
+        fill="url(#roseGoldGradient)" 
+        filter="url(#braceletShadow)"
+        stroke="#be185d" 
+        stroke-width="0.5"/>
+  
+  <!-- Modern pattern overlay -->
+  <path d="M 100 135 L 300 130 L 500 140 L 700 135 L 900 140 L 900 160 L 700 155 L 500 165 L 300 160 L 100 165 Z" 
+        fill="url(#modernPattern)" 
+        opacity="0.6"/>
+  
+  <!-- Top highlight -->
+  <path d="M 100 135 L 300 130 L 500 140 L 700 135 L 900 140" 
+        fill="none" 
+        stroke="white" 
+        stroke-width="2" 
+        opacity="0.8"/>
+  
+  <!-- Bottom shadow -->
+  <path d="M 100 165 L 300 160 L 500 165 L 700 155 L 900 160" 
+        fill="none" 
+        stroke="#9d174d" 
+        stroke-width="1" 
+        opacity="0.6"/>
+</svg>
