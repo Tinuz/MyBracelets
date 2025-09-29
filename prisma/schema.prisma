@@ -8,19 +8,43 @@ datasource db {
 }
 
 model BaseBracelet {
-  id             String   @id @default(cuid())
-  slug           String   @unique
+  id             String      @id @default(cuid())
+  slug           String      @unique
   name           String
   svgPath        String
   imageUrl       String?
   lengthMm       Int
   basePriceCents Int
-  active         Boolean  @default(true)
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
+  thickness      Float?      // Thickness in mm (e.g., 1.5, 2.0, 2.5)
+  color          String?     // Color option (e.g., "gold", "silver", "rose-gold")
+  metalType      MetalType?  // Type of metal
+  chainType      ChainType?  // Type of chain link
+  active         Boolean     @default(true)
+  createdAt      DateTime    @default(now())
+  updatedAt      DateTime    @updatedAt
   designs        Design[]
 
   @@map("base_bracelets")
+}
+
+enum MetalType {
+  GOLD
+  SILVER
+  ROSE_GOLD
+  WHITE_GOLD
+  PLATINUM
+  STAINLESS_STEEL
+}
+
+enum ChainType {
+  CABLE
+  CURB
+  FIGARO
+  ROPE
+  BOX
+  SNAKE
+  HERRINGBONE
+  BYZANTINE
 }
 
 model Charm {

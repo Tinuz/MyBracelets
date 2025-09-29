@@ -21,7 +21,7 @@ export default async function HomePage() {
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <PrimaryButton size="lg" asChild>
-              <Link href="/bracelets">
+              <Link href="/designer">
                 Start Designing
               </Link>
             </PrimaryButton>
