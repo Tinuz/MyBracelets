@@ -15,8 +15,8 @@ export default async function HomePage() {
             </span>
           </h1>
           <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-            Design a unique bracelet with our interactive charm placement tool. 
-            Choose from beautiful charms and position them exactly where you want.
+            Design a unique bracelet with our interactive designer tools. 
+            Create chain bracelets with charms, beads-only bracelets, or combine both for endless possibilities.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -30,6 +30,19 @@ export default async function HomePage() {
                 Learn More
               </Link>
             </PrimaryButton>
+          </div>
+          
+          {/* Cart Link */}
+          <div className="mt-6 text-center">
+            <Link 
+              href="/cart" 
+              className="inline-flex items-center space-x-2 text-gray-600 hover:text-gray-900 transition-colors"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-1.5 6M7 13l-1.5 6m9.5-6v6a2 2 0 01-2 2H9a2 2 0 01-2-2v-6m8 0V9a2 2 0 00-2-2H9a2 2 0 00-2 2v4.01" />
+              </svg>
+              <span>View Cart</span>
+            </Link>
           </div>
         </div>
       </section>

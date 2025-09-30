@@ -3,6 +3,7 @@
 import React, { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import Button, { PrimaryButton, SecondaryButton } from "@/components/ui/Button";
 import { LoadingSpinner, Alert, Card, CardContent, CardHeader } from "@/components/ui/Common";
+import { addToCart } from "@/lib/cart";
 
 // Types
 interface Charm {
@@ -37,11 +38,41 @@ interface Placement {
   quantity: number;
 }
 
-interface DesignerProps {
-  braceletSlug: string;
+// Import config types
+type BraceletType = 'CHAIN' | 'BEADS';
+type MetalType = 'GOLD' | 'SILVER' | 'ROSE_GOLD' | 'WHITE_GOLD' | 'PLATINUM' | 'STAINLESS_STEEL';
+type ChainType = 'CABLE' | 'CURB' | 'FIGARO' | 'ROPE' | 'BOX' | 'SNAKE' | 'HERRINGBONE' | 'BYZANTINE';
+type BeadSize = 2.0 | 4.0 | 6.0;
+
+interface BraceletConfig {
+  braceletType: BraceletType;
+  thickness: number;
+  length: number;
+  color: string;
+  metalType?: MetalType;
+  chainType?: ChainType;
+  beadSize?: BeadSize;
 }
 
-export default function Designer({ braceletSlug }: DesignerProps) {
+interface DesignerProps {
+  braceletSlug: string;
+  config: BraceletConfig;
+}
+
+// Import BeadsDesigner for beads bracelets
+import BeadsDesigner from './BeadsDesigner';
+
+export default function Designer({ braceletSlug, config }: DesignerProps) {
+  // Check if this is a beads bracelet
+  if (braceletSlug === 'beads-bracelet') {
+    return (
+      <BeadsDesigner 
+        braceletSlug={braceletSlug} 
+        beadSize={config.beadSize || 4.0} 
+        braceletLength={config.length}
+      />
+    );
+  }
   // Refs for SVG manipulation
   const pathRef = useRef<SVGPathElement | null>(null);
   const svgRef = useRef<SVGSVGElement | null>(null);
@@ -265,33 +296,49 @@ export default function Designer({ braceletSlug }: DesignerProps) {
     }
   }, [bracelet, braceletSlug, placements]);
 
-  // Checkout
-  const checkout = useCallback(async () => {
-    if (!designId) {
-      setError('Please save your design first');
+  // Add to Cart
+  const handleAddToCart = useCallback(() => {
+    if (!bracelet || placements.length === 0) {
+      setError('Please add at least one charm to your bracelet');
       return;
     }
     
     try {
-      const response = await fetch('/api/checkout', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ designId }),
+      // Prepare charm details
+      const charmDetails = placements.map(placement => {
+        const charm = charms.find(c => c.id === placement.charmId);
+        return {
+          id: placement.charmId,
+          name: charm?.name || 'Unknown Charm',
+          position: placement.t,
+          quantity: placement.quantity
+        };
       });
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Checkout failed');
-      }
+      // Add chain bracelet to cart
+      addToCart({
+        type: 'bracelet',
+        name: `${bracelet.name} Chain Bracelet`,
+        description: `Custom chain bracelet with ${pricing.charmCount} charm${pricing.charmCount !== 1 ? 's' : ''}`,
+        price: pricing.total / 100, // Convert from cents to euros
+        quantity: 1,
+        details: {
+          braceletType: 'CHAIN',
+          charms: charmDetails,
+          baseConfig: {
+            length: bracelet.lengthMm,
+            metalType: 'SILVER', // Default metal type
+            chainType: 'CABLE'   // Default chain type
+          }
+        }
+      });
 
-      const result = await response.json();
-      if (result.url) {
-        window.location.href = result.url;
-      }
+      // Redirect to cart
+      window.location.href = '/cart';
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Checkout failed');
+      setError(err instanceof Error ? err.message : 'Failed to add to cart');
     }
-  }, [designId]);
+  }, [bracelet, charms, placements, pricing]);
 
   if (loading) {
     return (
@@ -545,10 +592,10 @@ export default function Designer({ braceletSlug }: DesignerProps) {
                 
                 <SecondaryButton
                   className="w-full"
-                  onClick={checkout}
-                  disabled={!designId}
+                  onClick={handleAddToCart}
+                  disabled={placements.length === 0}
                 >
-                  Proceed to Checkout
+                  Add to Cart
                 </SecondaryButton>
                 
                 {placements.length > 0 && (

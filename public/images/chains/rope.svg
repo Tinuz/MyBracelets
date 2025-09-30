@@ -1,0 +1,55 @@
+<svg width="200" height="80" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Rope Chain - Twisted rope design -->
+  <defs>
+    <linearGradient id="ropeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8f8f8"/>
+      <stop offset="30%" style="stop-color:#e8e8e8"/>
+      <stop offset="70%" style="stop-color:#d0d0d0"/>
+      <stop offset="100%" style="stop-color:#b8b8b8"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Rope base -->
+  <path d="M10 40 Q30 30 50 40 Q70 50 90 40 Q110 30 130 40 Q150 50 170 40 Q180 35 190 40" 
+        fill="none" stroke="url(#ropeGrad)" stroke-width="8" stroke-linecap="round"/>
+  
+  <!-- Twist pattern -->
+  <path d="M10 40 Q30 35 50 40 Q70 45 90 40 Q110 35 130 40 Q150 45 170 40 Q180 37 190 40" 
+        fill="none" stroke="#999" stroke-width="3" stroke-linecap="round"/>
+  <path d="M10 40 Q30 45 50 40 Q70 35 90 40 Q110 45 130 40 Q150 35 170 40 Q180 43 190 40" 
+        fill="none" stroke="#999" stroke-width="3" stroke-linecap="round"/>
+  
+  <!-- Cross-hatch pattern for rope texture -->
+  <g stroke="#777" stroke-width="0.5" opacity="0.6">
+    <line x1="15" y1="37" x2="18" y2="43"/>
+    <line x1="20" y1="36" x2="23" y2="42"/>
+    <line x1="25" y1="35" x2="28" y2="41"/>
+    <line x1="35" y1="34" x2="38" y2="40"/>
+    <line x1="40" y1="36" x2="43" y2="42"/>
+    <line x1="45" y1="38" x2="48" y2="44"/>
+    <line x1="55" y1="43" x2="58" y2="37"/>
+    <line x1="60" y1="44" x2="63" y2="38"/>
+    <line x1="65" y1="45" x2="68" y2="39"/>
+    <line x1="75" y1="46" x2="78" y2="40"/>
+    <line x1="80" y1="44" x2="83" y2="38"/>
+    <line x1="85" y1="42" x2="88" y2="36"/>
+    <line x1="95" y1="37" x2="98" y2="43"/>
+    <line x1="100" y1="36" x2="103" y2="42"/>
+    <line x1="105" y1="35" x2="108" y2="41"/>
+    <line x1="115" y1="34" x2="118" y2="40"/>
+    <line x1="120" y1="36" x2="123" y2="42"/>
+    <line x1="125" y1="38" x2="128" y2="44"/>
+    <line x1="135" y1="43" x2="138" y2="37"/>
+    <line x1="140" y1="44" x2="143" y2="38"/>
+    <line x1="145" y1="45" x2="148" y2="39"/>
+    <line x1="155" y1="46" x2="158" y2="40"/>
+    <line x1="160" y1="44" x2="163" y2="38"/>
+    <line x1="165" y1="42" x2="168" y2="36"/>
+    <line x1="175" y1="38" x2="178" y2="44"/>
+    <line x1="180" y1="37" x2="183" y2="43"/>
+  </g>
+  
+  <!-- Highlights -->
+  <path d="M12 37 Q32 27 52 37 Q72 47 92 37 Q112 27 132 37 Q152 47 172 37 Q182 32 188 37" 
+        fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" opacity="0.7"/>
+</svg>

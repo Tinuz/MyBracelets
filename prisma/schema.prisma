@@ -8,23 +8,34 @@ datasource db {
 }
 
 model BaseBracelet {
-  id             String      @id @default(cuid())
-  slug           String      @unique
+  id             String        @id @default(cuid())
+  slug           String        @unique
   name           String
-  svgPath        String
-  imageUrl       String?
+  description    String        @default("")
+  svgPath        String?       // Optional, for technical representation
+  imageUrl       String?       // Primary product image
+  imageUrl2      String?       // Secondary product image
+  imageUrl3      String?       // Third product image
   lengthMm       Int
   basePriceCents Int
-  thickness      Float?      // Thickness in mm (e.g., 1.5, 2.0, 2.5)
-  color          String?     // Color option (e.g., "gold", "silver", "rose-gold")
-  metalType      MetalType?  // Type of metal
-  chainType      ChainType?  // Type of chain link
-  active         Boolean     @default(true)
-  createdAt      DateTime    @default(now())
-  updatedAt      DateTime    @updatedAt
+  braceletType   BraceletType  @default(CHAIN) // Type of bracelet: chain or beads
+  thickness      Float?        // Thickness in mm (e.g., 1.5, 2.0, 2.5) - for chains OR bead diameter
+  color          String?       // Color option (e.g., "gold", "silver", "rose-gold")
+  metalType      MetalType?    // Type of metal (for chains)
+  chainType      ChainType?    // Type of chain link (for chain bracelets)
+  stock          Int           @default(0) // Available quantity
+  featured       Boolean       @default(false) // Featured product
+  active         Boolean       @default(true)
+  createdAt      DateTime      @default(now())
+  updatedAt      DateTime      @updatedAt
   designs        Design[]
 
   @@map("base_bracelets")
+}
+
+enum BraceletType {
+  CHAIN  // Traditional chain bracelet with charms
+  BEADS  // Small beads bracelet with optional charms
 }
 
 enum MetalType {
@@ -51,6 +62,7 @@ model Charm {
   id             String        @id @default(cuid())
   sku            String        @unique
   name           String
+  description    String        @default("")
   priceCents     Int
   widthMm        Float
   heightMm       Float
@@ -67,6 +79,41 @@ model Charm {
   @@map("charms")
 }
 
+model Chain {
+  id           String       @id @default(cuid())
+  name         String       // e.g., "Cable Chain", "Curb Chain"
+  type         ChainType    // CABLE, CURB, FIGARO, etc.
+  description  String       @default("")
+  priceCents   Int
+  thickness    Float        // Chain thickness in mm
+  metalType    MetalType    // GOLD, SILVER, etc.
+  imageUrl     String?      // Chain pattern image
+  svgPath      String?      // SVG representation
+  active       Boolean      @default(true)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  @@map("chains")
+}
+
+model Bead {
+  id           String       @id @default(cuid())
+  color        String       // Custom color name (e.g., "TURQUOISE", "MAROON", etc.)
+  colorHex     String       // Hex color value (e.g., "#40E0D0", "#800000", etc.)
+  name         String
+  priceCents   Int
+  diameterMm   Float        // Bead diameter (2mm, 4mm, 6mm)
+  imageUrl     String?
+  active       Boolean      @default(true)
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  designs      DesignBead[]
+
+  @@map("beads")
+}
+
+
+
 model Design {
   id            String        @id @default(cuid())
   braceletId    String
@@ -78,9 +125,22 @@ model Design {
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
   charms        DesignCharm[]
+  beads         DesignBead[]  // For beads bracelets
   bracelet      BaseBracelet  @relation(fields: [braceletId], references: [id], onDelete: Cascade)
 
   @@map("designs")
+}
+
+model DesignBead {
+  id       String @id @default(cuid())
+  designId String
+  beadId   String
+  position Int    // Position on the bracelet (0, 1, 2, etc.)
+  quantity Int    @default(1)
+  bead     Bead   @relation(fields: [beadId], references: [id])
+  design   Design @relation(fields: [designId], references: [id], onDelete: Cascade)
+
+  @@map("design_beads")
 }
 
 model DesignCharm {
@@ -101,4 +161,48 @@ model DesignCharm {
 enum DesignStatus {
   DRAFT
   ORDERED
+}
+
+// Add Order management for admin
+model Order {
+  id              String       @id @default(cuid())
+  orderNumber     String       @unique
+  customerEmail   String
+  customerName    String?
+  totalCents      Int
+  currency        String       @default("EUR")
+  status          OrderStatus  @default(PENDING)
+  paymentProvider String?      // "stripe", "mollie", etc.
+  paymentId       String?      // External payment ID
+  shippingAddress String?
+  notes           String?
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+  items           OrderItem[]
+
+  @@map("orders")
+}
+
+model OrderItem {
+  id          String @id @default(cuid())
+  orderId     String
+  designId    String?
+  productType String // "design", "bracelet", "charm", "bead"
+  productId   String
+  productName String
+  quantity    Int
+  priceCents  Int
+  order       Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@map("order_items")
+}
+
+enum OrderStatus {
+  PENDING
+  CONFIRMED
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  REFUNDED
 }

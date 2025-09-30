@@ -1,0 +1,101 @@
+<svg width="200" height="80" viewBox="0 0 200 80" xmlns="http://www.w3.org/2000/svg">
+  <!-- Herringbone Chain - V-shaped pattern -->
+  <defs>
+    <linearGradient id="herringboneGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f8f8f8"/>
+      <stop offset="25%" style="stop-color:#e5e5e5"/>
+      <stop offset="50%" style="stop-color:#d5d5d5"/>
+      <stop offset="75%" style="stop-color:#e5e5e5"/>
+      <stop offset="100%" style="stop-color:#f8f8f8"/>
+    </linearGradient>
+    <linearGradient id="herringboneShadow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#ccc"/>
+      <stop offset="100%" style="stop-color:#999"/>
+    </linearGradient>
+  </defs>
+  
+  <!-- Base chain -->
+  <rect x="10" y="35" width="180" height="10" rx="5" fill="url(#herringboneGrad)" stroke="#888" stroke-width="0.5"/>
+  
+  <!-- Herringbone V-pattern -->
+  <g stroke="#999" stroke-width="0.5" fill="none" opacity="0.8">
+    <!-- First row of V's -->
+    <path d="M15,38 L20,35 L25,38"/>
+    <path d="M20,38 L25,35 L30,38"/>
+    <path d="M25,38 L30,35 L35,38"/>
+    <path d="M30,38 L35,35 L40,38"/>
+    <path d="M35,38 L40,35 L45,38"/>
+    <path d="M40,38 L45,35 L50,38"/>
+    <path d="M45,38 L50,35 L55,38"/>
+    <path d="M50,38 L55,35 L60,38"/>
+    <path d="M55,38 L60,35 L65,38"/>
+    <path d="M60,38 L65,35 L70,38"/>
+    <path d="M65,38 L70,35 L75,38"/>
+    <path d="M70,38 L75,35 L80,38"/>
+    <path d="M75,38 L80,35 L85,38"/>
+    <path d="M80,38 L85,35 L90,38"/>
+    <path d="M85,38 L90,35 L95,38"/>
+    <path d="M90,38 L95,35 L100,38"/>
+    <path d="M95,38 L100,35 L105,38"/>
+    <path d="M100,38 L105,35 L110,38"/>
+    <path d="M105,38 L110,35 L115,38"/>
+    <path d="M110,38 L115,35 L120,38"/>
+    <path d="M115,38 L120,35 L125,38"/>
+    <path d="M120,38 L125,35 L130,38"/>
+    <path d="M125,38 L130,35 L135,38"/>
+    <path d="M130,38 L135,35 L140,38"/>
+    <path d="M135,38 L140,35 L145,38"/>
+    <path d="M140,38 L145,35 L150,38"/>
+    <path d="M145,38 L150,35 L155,38"/>
+    <path d="M150,38 L155,35 L160,38"/>
+    <path d="M155,38 L160,35 L165,38"/>
+    <path d="M160,38 L165,35 L170,38"/>
+    <path d="M165,38 L170,35 L175,38"/>
+    <path d="M170,38 L175,35 L180,38"/>
+    <path d="M175,38 L180,35 L185,38"/>
+    
+    <!-- Second row of inverted V's -->
+    <path d="M15,42 L20,45 L25,42"/>
+    <path d="M20,42 L25,45 L30,42"/>
+    <path d="M25,42 L30,45 L35,42"/>
+    <path d="M30,42 L35,45 L40,42"/>
+    <path d="M35,42 L40,45 L45,42"/>
+    <path d="M40,42 L45,45 L50,42"/>
+    <path d="M45,42 L50,45 L55,42"/>
+    <path d="M50,42 L55,45 L60,42"/>
+    <path d="M55,42 L60,45 L65,42"/>
+    <path d="M60,42 L65,45 L70,42"/>
+    <path d="M65,42 L70,45 L75,42"/>
+    <path d="M70,42 L75,45 L80,42"/>
+    <path d="M75,42 L80,45 L85,42"/>
+    <path d="M80,42 L85,45 L90,42"/>
+    <path d="M85,42 L90,45 L95,42"/>
+    <path d="M90,42 L95,45 L100,42"/>
+    <path d="M95,42 L100,45 L105,42"/>
+    <path d="M100,42 L105,45 L110,42"/>
+    <path d="M105,42 L110,45 L115,42"/>
+    <path d="M110,42 L115,45 L120,42"/>
+    <path d="M115,42 L120,45 L125,42"/>
+    <path d="M120,42 L125,45 L130,42"/>
+    <path d="M125,42 L130,45 L135,42"/>
+    <path d="M130,42 L135,45 L140,42"/>
+    <path d="M135,42 L140,45 L145,42"/>
+    <path d="M140,42 L145,45 L150,42"/>
+    <path d="M145,42 L150,45 L155,42"/>
+    <path d="M150,42 L155,45 L160,42"/>
+    <path d="M155,42 L160,45 L165,42"/>
+    <path d="M160,42 L165,45 L170,42"/>
+    <path d="M165,42 L170,45 L175,42"/>
+    <path d="M170,42 L175,45 L180,42"/>
+    <path d="M175,42 L180,45 L185,42"/>
+  </g>
+  
+  <!-- Top highlight -->
+  <rect x="10" y="36" width="180" height="2" rx="1" fill="#fff" opacity="0.6"/>
+  
+  <!-- Bottom shadow -->
+  <rect x="10" y="43" width="180" height="2" rx="1" fill="url(#herringboneShadow)" opacity="0.4"/>
+  
+  <!-- Center line for definition -->
+  <line x1="10" y1="40" x2="190" y2="40" stroke="#aaa" stroke-width="0.3" opacity="0.5"/>
+</svg>

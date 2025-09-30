@@ -9,15 +9,26 @@ export async function GET() {
         id: true,
         slug: true,
         name: true,
+        description: true,
         svgPath: true,
         imageUrl: true,
+        imageUrl2: true,
+        imageUrl3: true,
         lengthMm: true,
         basePriceCents: true,
+        braceletType: true,
+        thickness: true,
+        color: true,
+        metalType: true,
+        chainType: true,
+        stock: true,
+        featured: true,
         active: true,
       },
-      orderBy: {
-        basePriceCents: 'asc',
-      },
+      orderBy: [
+        { featured: 'desc' }, // Featured products first
+        { basePriceCents: 'asc' },
+      ],
     })
 
     return NextResponse.json(bracelets)

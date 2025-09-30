@@ -1,7 +1,14 @@
-import { NextResponse } from "next/server";
-import { prisma } from "@/lib/db";
-import { env } from "@/lib/env";
-import Stripe from "stripe";
+import { NextRequest, NextResponse } from 'next/server';
+import Stripe from 'stripe';
+import { prisma } from '@/lib/db';
+
+if (!process.env.STRIPE_SECRET_KEY) {
+  throw new Error('STRIPE_SECRET_KEY is not defined');
+}
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+  apiVersion: '2023-10-16',
+});
 
 export async function POST(request: Request) {
   try {
@@ -67,23 +74,23 @@ export async function POST(request: Request) {
     }
 
     // Handle payment provider
-    if (env.PAYMENT_PROVIDER === "stripe") {
-      if (!env.STRIPE_SECRET_KEY) {
+    if (process.env.PAYMENT_PROVIDER === "stripe") {
+      if (!process.env.STRIPE_SECRET_KEY) {
         return NextResponse.json(
           { error: "Stripe not configured" },
           { status: 500 }
         );
       }
 
-      const stripe = new Stripe(env.STRIPE_SECRET_KEY, {
+      const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
         apiVersion: "2023-10-16",
       });
 
       // Create Stripe checkout session
       const session = await stripe.checkout.sessions.create({
         mode: "payment",
-        success_url: `${env.APP_URL}/success?design=${design.id}`,
-        cancel_url: `${env.APP_URL}/designer/${design.bracelet.slug}?canceled=1`,
+        success_url: `${process.env.APP_URL}/success?design=${design.id}`,
+        cancel_url: `${process.env.APP_URL}/designer/${design.bracelet.slug}?canceled=1`,
         metadata: {
           designId: design.id,
         },
@@ -111,7 +118,7 @@ export async function POST(request: Request) {
         url: session.url,
         sessionId: session.id,
       });
-    } else if (env.PAYMENT_PROVIDER === "mollie") {
+    } else if (process.env.PAYMENT_PROVIDER === "mollie") {
       // TODO: Implement Mollie integration
       return NextResponse.json(
         { error: "Mollie integration not yet implemented" },
@@ -120,7 +127,7 @@ export async function POST(request: Request) {
     } else {
       // Mock/development mode - simulate successful payment
       return NextResponse.json({
-        url: `${env.APP_URL}/success?design=${design.id}&mock=1`,
+        url: `${process.env.APP_URL}/success?design=${design.id}&mock=1`,
         sessionId: "mock_session_" + Date.now(),
       });
     }
