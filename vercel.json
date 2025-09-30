@@ -1,12 +1,7 @@
 {
-  "buildCommand": "npm run build",
-  "installCommand": "npm install",
   "functions": {
     "app/api/**/*.ts": {
-      "runtime": "nodejs20.x"
+      "maxDuration": 30
     }
-  },
-  "env": {
-    "PRISMA_GENERATE_SKIP_POSTINSTALL": "false"
   }
 }
