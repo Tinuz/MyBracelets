@@ -30,6 +30,10 @@ model BaseBracelet {
   updatedAt      DateTime      @updatedAt
   designs        Design[]
 
+  // Performance indexes
+  @@index([active, featured, basePriceCents])
+  @@index([braceletType, active])
+  @@index([metalType, active])
   @@map("base_bracelets")
 }
 
@@ -76,6 +80,9 @@ model Charm {
   updatedAt      DateTime      @updatedAt
   designs        DesignCharm[]
 
+  // Performance indexes
+  @@index([active, priceCents])
+  @@index([stock, active])
   @@map("charms")
 }
 
@@ -180,6 +187,10 @@ model Order {
   updatedAt       DateTime     @updatedAt
   items           OrderItem[]
 
+  // Performance indexes
+  @@index([status, createdAt])
+  @@index([customerEmail])
+  @@index([paymentId])
   @@map("orders")
 }
 

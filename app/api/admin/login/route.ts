@@ -7,7 +7,11 @@ const ADMIN_CREDENTIALS = {
   password: 'admin123' // In production, use hashed passwords
 };
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
+const JWT_SECRET = process.env.JWT_SECRET;
+
+if (!JWT_SECRET) {
+  throw new Error('JWT_SECRET environment variable is required');
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -23,13 +27,9 @@ export async function POST(request: NextRequest) {
 
     // Generate JWT token
     const token = jwt.sign(
-      { 
-        email: email,
-        role: 'admin',
-        iat: Math.floor(Date.now() / 1000)
-      },
-      JWT_SECRET,
-      { expiresIn: '24h' }
+      { email: 'admin@example.com', role: 'admin' as const },
+      JWT_SECRET!,
+      { expiresIn: '7d' }
     );
 
     return NextResponse.json({

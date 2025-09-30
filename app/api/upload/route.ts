@@ -1,11 +1,27 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { writeFile, mkdir } from 'fs/promises';
-import { existsSync } from 'fs';
-import path from 'path';
 import { isValidAdminRequest } from '@/lib/admin-auth';
+import { uploadToStorage, StorageType } from '@/lib/supabase/storage';
 
 const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 const ALLOWED_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+const ALLOWED_EXTENSIONS = ['.jpg', '.jpeg', '.png', '.webp'];
+
+// Security: Check file header/magic bytes to prevent MIME type spoofing
+async function validateImageFile(file: File): Promise<boolean> {
+  try {
+    const buffer = await file.arrayBuffer();
+    const uint8Array = new Uint8Array(buffer);
+    
+    // Check magic bytes for common image formats
+    const jpg = uint8Array[0] === 0xFF && uint8Array[1] === 0xD8 && uint8Array[2] === 0xFF;
+    const png = uint8Array[0] === 0x89 && uint8Array[1] === 0x50 && uint8Array[2] === 0x4E && uint8Array[3] === 0x47;
+    const webp = uint8Array[8] === 0x57 && uint8Array[9] === 0x45 && uint8Array[10] === 0x42 && uint8Array[11] === 0x50;
+    
+    return jpg || png || webp;
+  } catch {
+    return false;
+  }
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -20,7 +36,7 @@ export async function POST(request: NextRequest) {
 
     const formData = await request.formData();
     const file = formData.get('file') as File | null;
-    const category = formData.get('category') as string; // 'beads', 'charms', 'bracelets', or 'chains'
+    const category = formData.get('category') as string;
 
     if (!file) {
       return NextResponse.json(
@@ -44,7 +60,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Validate file type
+    // Validate file type (MIME type)
     if (!ALLOWED_TYPES.includes(file.type)) {
       return NextResponse.json(
         { error: 'Invalid file type. Only JPEG, PNG, and WebP are allowed' },
@@ -52,32 +68,34 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Generate unique filename
-    const timestamp = Date.now();
-    const randomString = Math.random().toString(36).substring(2, 15);
-    const extension = path.extname(file.name).toLowerCase();
-    const filename = `${timestamp}-${randomString}${extension}`;
-
-    // Create upload directory if it doesn't exist
-    const uploadDir = path.join(process.cwd(), 'public', 'uploads', category);
-    if (!existsSync(uploadDir)) {
-      await mkdir(uploadDir, { recursive: true });
+    // Validate file extension
+    const fileExtension = file.name.toLowerCase().substring(file.name.lastIndexOf('.'));
+    if (!ALLOWED_EXTENSIONS.includes(fileExtension)) {
+      return NextResponse.json(
+        { error: 'Invalid file extension. Only .jpg, .jpeg, .png, and .webp are allowed' },
+        { status: 400 }
+      );
     }
 
-    // Save file
-    const filePath = path.join(uploadDir, filename);
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
+    // Security: Validate actual file content (magic bytes)
+    const isValidImage = await validateImageFile(file);
+    if (!isValidImage) {
+      return NextResponse.json(
+        { error: 'File content does not match image format' },
+        { status: 400 }
+      );
+    }
 
-    await writeFile(filePath, buffer);
+    // Security: Sanitize filename to prevent path traversal
+    const sanitizedFilename = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
 
-    // Return the URL path (relative to public directory)
-    const imageUrl = `/uploads/${category}/${filename}`;
+    // Upload to Supabase Storage
+    const imageUrl = await uploadToStorage(file, category as StorageType, sanitizedFilename);
 
     return NextResponse.json({
       success: true,
       imageUrl,
-      filename,
+      filename: file.name,
       size: file.size,
       type: file.type
     });

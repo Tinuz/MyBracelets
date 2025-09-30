@@ -1,6 +1,10 @@
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
+const JWT_SECRET = process.env.JWT_SECRET;
+
+if (!JWT_SECRET) {
+  throw new Error('JWT_SECRET environment variable is required');
+}
 
 export interface AdminUser {
   email: string;
@@ -10,7 +14,7 @@ export interface AdminUser {
 
 export function verifyAdminToken(token: string): AdminUser | null {
   try {
-    const decoded = jwt.verify(token, JWT_SECRET) as AdminUser;
+    const decoded = jwt.verify(token, JWT_SECRET!) as AdminUser;
     return decoded;
   } catch (error) {
     return null;
