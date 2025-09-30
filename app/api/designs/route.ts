@@ -29,7 +29,7 @@ export async function POST(request: Request) {
       },
     });
 
-    const charmMap = new Map(charms.map(c => [c.id, c]));
+    const charmMap = new Map(charms.map((c: any) => [c.id, c]));
 
     // Validate each placement
     for (const placement of validatedData.placements) {

@@ -17,7 +17,16 @@ interface PageProps {
 }
 
 export default function DesignerPage({ params }: PageProps) {
-  return <Designer braceletSlug={params.slug} />
+  // Default config for now - in production would fetch from API
+  const defaultConfig = {
+    braceletType: 'CHAIN' as const,
+    thickness: 4,
+    length: 180,
+    color: 'silver',
+    metalType: 'SILVER' as const,
+    chainType: 'CABLE' as const
+  };
+  return <Designer braceletSlug={params.slug} config={defaultConfig} />
 }
 
 // Generate static paths for known bracelet slugs
