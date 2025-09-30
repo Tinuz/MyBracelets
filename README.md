@@ -210,26 +210,50 @@ E2E tests cover:
 
 ### Vercel (Recommended)
 
-1. Connect your repository to Vercel
-2. Add environment variables in Vercel dashboard
-3. Deploy automatically on push
+The project is optimized for Vercel deployment with automatic Prisma Client generation.
 
-### Environment Variables for Production
+#### Quick Deploy Steps:
 
-```env
-DATABASE_URL="your-production-database-url"
-REDIS_URL="your-production-redis-url"
-STRIPE_SECRET_KEY="sk_live_your_live_key"
-APP_URL="https://yoursite.com"
-```
+1. **Connect Repository**
+   - Import project to Vercel from GitHub
+   - Select the repository and branch
 
-### Database Migration
+2. **Environment Variables**
+   ```env
+   DATABASE_URL="postgresql://user:pass@host:5432/db"
+   STRIPE_SECRET_KEY="sk_live_..."
+   STRIPE_PUBLISHABLE_KEY="pk_live_..."
+   STRIPE_WEBHOOK_SECRET="whsec_..."
+   JWT_SECRET="your-secure-jwt-secret"
+   PAYMENT_PROVIDER="stripe"
+   ```
+
+3. **Build Configuration**
+   - Build Command: `npm run build` (includes prisma generate)
+   - Install Command: `npm install`
+   - Output Directory: `.next`
+
+4. **Deploy**
+   - Push to main branch or trigger manual deployment
+   - Vercel will automatically build and deploy
+
+#### Database Setup
 
 ```bash
-# Run in production environment
+# Apply migrations to production database
 npx prisma migrate deploy
-npx prisma db seed
+
+# Seed production data (optional)
+npm run db:seed
 ```
+
+#### Troubleshooting
+
+- **Prisma Issues**: The build script includes `prisma generate` and `postinstall` hook
+- **Environment Variables**: Ensure all required vars are set in Vercel dashboard
+- **Build Logs**: Check Vercel function logs for runtime errors
+
+See `DEPLOYMENT.md` for detailed deployment guide.
 
 ## 🏛 Architecture
 

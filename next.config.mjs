@@ -1,7 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['localhost'],
+    domains: ['localhost', 'vercel.app'],
+  },
+  experimental: {
+    serverComponentsExternalPackages: ['@prisma/client'],
   },
 };
 

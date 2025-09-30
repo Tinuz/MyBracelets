@@ -32,6 +32,13 @@ export interface CartItem {
   };
 }
 
+// Helper function to dispatch cart update events
+function dispatchCartUpdate() {
+  if (typeof window !== 'undefined') {
+    window.dispatchEvent(new CustomEvent('cart-updated'));
+  }
+}
+
 export function addToCart(item: Omit<CartItem, 'id'>): string {
   // Generate unique ID
   const itemId = `cart-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
@@ -49,6 +56,9 @@ export function addToCart(item: Omit<CartItem, 'id'>): string {
   
   // Save to localStorage
   localStorage.setItem('bracelet-cart', JSON.stringify(updatedCart));
+  
+  // Dispatch update event
+  dispatchCartUpdate();
   
   console.log('✅ Added to cart:', cartItem);
   
@@ -79,10 +89,16 @@ export function removeFromCart(itemId: string): void {
   const existingCart = getCart();
   const updatedCart = existingCart.filter(item => item.id !== itemId);
   localStorage.setItem('bracelet-cart', JSON.stringify(updatedCart));
+  
+  // Dispatch update event
+  dispatchCartUpdate();
 }
 
 export function clearCart(): void {
   localStorage.removeItem('bracelet-cart');
+  
+  // Dispatch update event
+  dispatchCartUpdate();
 }
 
 export function updateCartItemQuantity(itemId: string, quantity: number): void {
@@ -96,4 +112,7 @@ export function updateCartItemQuantity(itemId: string, quantity: number): void {
     item.id === itemId ? { ...item, quantity } : item
   );
   localStorage.setItem('bracelet-cart', JSON.stringify(updatedCart));
+  
+  // Dispatch update event
+  dispatchCartUpdate();
 }

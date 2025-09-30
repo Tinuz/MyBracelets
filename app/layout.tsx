@@ -1,6 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import { Navbar } from '@/components/ui/Navbar'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -17,25 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <header className="bg-white shadow-sm border-b">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-between items-center h-16">
-              <div className="flex items-center">
-                <h1 className="text-xl font-bold text-gray-900">
-                  La Nina Bracelets
-                </h1>
-              </div>
-              <nav className="flex items-center space-x-4">
-                <a href="/bracelets" className="text-gray-700 hover:text-gray-900">
-                  Bracelets
-                </a>
-                <a href="/about" className="text-gray-700 hover:text-gray-900">
-                  About
-                </a>
-              </nav>
-            </div>
-          </div>
-        </header>
+        <Navbar />
         
         <main>{children}</main>
         
