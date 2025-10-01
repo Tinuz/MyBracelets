@@ -1,0 +1,228 @@
+{
+  "common": {
+    "loading": "Laden...",
+    "error": "Er is een fout opgetreden",
+    "save": "Opslaan",
+    "cancel": "Annuleren",
+    "delete": "Verwijderen",
+    "edit": "Bewerken",
+    "close": "Sluiten",
+    "back": "Terug",
+    "next": "Volgende",
+    "continue": "Doorgaan",
+    "addToCart": "Toevoegen aan Winkelwagen",
+    "viewCart": "Bekijk Winkelwagen",
+    "checkout": "Afrekenen",
+    "price": "Prijs",
+    "total": "Totaal",
+    "quantity": "Aantal",
+    "tagline": "Handgemaakte sieraden",
+    "designNow": "Ontwerp Nu",
+    "designYourBracelet": "Ontwerp Je Bracelet"
+  },
+  "navigation": {
+    "home": "Home",
+    "collection": "Collectie", 
+    "designer": "Designer",
+    "about": "Over Ons",
+    "contact": "Contact",
+    "cart": "Winkelwagen",
+    "account": "Account"
+  },
+  "homepage": {
+    "hero": {
+      "badge": "Handgemaakte Sieraden",
+      "title": "Ontwerp Je",
+      "subtitle": "Perfecte Bracelet",
+      "description": "Creëer een unieke bracelet met onze interactieve designer. Combineer charms, beads en kleuren voor eindeloze mogelijkheden.",
+      "ctaStart": "Start Ontwerpen",
+      "ctaCollection": "Bekijk Collectie",
+      "trustIndicator1": "Premium Kwaliteit",
+      "trustIndicator2": "Snelle Levering"
+    },
+    "steps": {
+      "step1": {
+        "title": "Kies Je Basis",
+        "description": "Selecteer uit onze prachtige base bracelets in verschillende stijlen en kleuren"
+      },
+      "step2": {
+        "title": "Voeg Charms Toe", 
+        "description": "Sleep charms naar je bracelet en plaats ze precies waar je wilt"
+      },
+      "step3": {
+        "title": "Bestellen",
+        "description": "Bewaar je ontwerp en ga naar de checkout. Wij maken je unieke bracelet"
+      }
+    },
+    "howItWorks": {
+      "badge": "Zo Werkt Het",
+      "title": "In 3 Simpele Stappen",
+      "description": "Van concept naar creation - ontdek hoe eenvoudig het is om je droomarm bracelet te maken"
+    },
+    "whyDesigner": {
+      "title": "Waarom Onze Designer Tool?",
+      "feature1": {
+        "title": "Real-time Visualisatie",
+        "description": "Zie direct hoe je bracelet eruit komt te zien tijdens het ontwerpen"
+      },
+      "feature2": {
+        "title": "Slimme Prijsberekening", 
+        "description": "Automatische kortingen bij 5+ charms (5%) of 10+ charms (10%)"
+      },
+      "feature3": {
+        "title": "Onbeperkte Mogelijkheden",
+        "description": "Combineer chains, beads en charms voor unieke creaties"
+      },
+      "cta": "Probeer Nu Gratis"
+    },
+    "usps": {
+      "title": "Waarom La Nina Bracelets?",
+      "description": "Ontdek wat ons onderscheidt in de wereld van handgemaakte sieraden",
+      "usp1": {
+        "title": "Interactief Ontwerpen",
+        "description": "Real-time visuele designer met drag & drop charm positionering voor perfecte controle"
+      },
+      "usp2": {
+        "title": "Premium Kwaliteit",
+        "description": "Hoogwaardige materialen en zorgvuldig vakmanschap voor duurzame sieraden"
+      },
+      "usp3": {
+        "title": "Snelle Levering",
+        "description": "Veilige en snelle levering rechtstreeks bij je thuis binnen 2-3 werkdagen"
+      },
+      "usp4": {
+        "title": "Slimme Prijzen",
+        "description": "Volume kortingen: 5% korting bij 5+ charms, 10% korting bij 10+ charms"
+      }
+    },
+    "socialProof": {
+      "customers": "Tevreden Klanten",
+      "bracelets": "Bracelets Gemaakt",
+      "rating": "Gemiddelde Review"
+    },
+    "reviews": {
+      "badge": "Klantreviews",
+      "title": "Wat Onze Klanten Zeggen",
+      "review1": {
+        "quote": "Zo blij met mijn bracelet! De designer tool was super makkelijk te gebruiken en het resultaat is nog mooier dan ik had verwacht."
+      },
+      "review2": {
+        "quote": "Perfecte kwaliteit en snelle levering! Ik heb al drie bracelets besteld voor vrienden en familie."
+      },
+      "review3": {
+        "quote": "De charms zijn van geweldige kwaliteit en de bracelet zit perfect. Absolute aanrader!"
+      }
+    },
+    "finalCta": {
+      "title": "Klaar Om Iets",
+      "subtitle": "Moois Te Creëren?",
+      "description": "Begin vandaag nog met het ontwerpen van je perfecte bracelet. Het duurt maar een paar minuten!",
+      "ctaStart": "Start Je Ontwerp",
+      "ctaCollection": "Bekijk Collectie",
+      "trustSignal1": "Gratis Verzending vanaf €50",
+      "trustSignal2": "30 Dagen Retourgarantie"
+    }
+  },
+  "designer": {
+    "title": "Ontwerp Je Armband",
+    "subtitle": "Configureer je perfecte armband en creëer patronen",
+    "braceletType": "Armband Type",
+    "braceletTypeDescription": "Kies tussen ketting of kralenarmband",
+    "chainBracelet": "Ketting Armband",
+    "chainDescription": "Traditionele ketting met charmes",
+    "beadsBracelet": "Kralen Armband",
+    "beadsDescription": "Kleurrijk kralenpatroon",
+    "selectMetal": "Selecteer Metaal",
+    "chainStyle": "Ketting Stijl",
+    "chainStyleDescription": "Klik op een afbeelding om het patroon in detail te zien",
+    "beadSize": "Kraal Grootte",
+    "beadSizeDescription": "Kies de diameter van je kralen",
+    "delicate": "Delicaat",
+    "classic": "Klassiek",
+    "bold": "Stoer",
+    "thickness": "Dikte",
+    "length": "Lengte",
+    "priceEstimate": "Prijs Schatting",
+    "baseBraceletPrice": "Basis armband prijs (voor charmes)",
+    "baseBraceletPriceBeads": "Basis armband prijs (voor kralen & charmes)",
+    "continueToAddCharms": "Doorgaan naar Charmes Toevoegen",
+    "continueToDesignBeads": "Doorgaan naar Kralen Ontwerpen",
+    "backToHome": "Terug naar Home"
+  },
+  "beadsDesigner": {
+    "title": "Ontwerp Je Kralenarmband",
+    "subtitle": "Sleep kralen van het palet om je patroon te creëren",
+    "beadsPalette": "Kralen Palet",
+    "braceletCanvas": "Armband Canvas",
+    "dropBeadsHere": "Sleep kralen hier om je patroon te maken",
+    "braceletPreview": "Armband Voorvertoning",
+    "dropBeadsStart": "Sleep kralen hier om te beginnen met ontwerpen",
+    "patternSummary": "Patroon Samenvatting",
+    "beadsUsed": "Gebruikte Kralen",
+    "maxCapacity": "Max Capaciteit",
+    "beadSize": "Kraal Grootte",
+    "length": "Lengte",
+    "placedBeads": "Geplaatste Kralen",
+    "priceSummary": "Prijs Samenvatting",
+    "basedOnBeads": "Gebaseerd op {count} kralen",
+    "wantToAddCharms": "Wil je charmes toevoegen aan je armband?",
+    "addCharms": "Charmes Toevoegen",
+    "completeWithoutCharms": "Voltooien zonder Charmes",
+    "backToConfiguration": "Terug naar Configuratie"
+  },
+  "bracelets": {
+    "title": "Onze Armband Collectie",
+    "subtitle": "Ontdek onze handgemaakte armbanden",
+    "filterBy": "Filter op",
+    "sortBy": "Sorteer op",
+    "allTypes": "Alle Types",
+    "chainBracelets": "Ketting Armbanden",
+    "beadBracelets": "Kralen Armbanden", 
+    "charmBracelets": "Charme Armbanden",
+    "priceRange": "Prijs Bereik",
+    "sortPriceLowHigh": "Prijs: Laag naar Hoog",
+    "sortPriceHighLow": "Prijs: Hoog naar Laag",
+    "sortNewest": "Nieuwste Eerst",
+    "sortPopular": "Meest Populair",
+    "startingAt": "Vanaf",
+    "customizeNow": "Nu Aanpassen",
+    "viewDetails": "Bekijk Details",
+    "noResults": "Geen armbanden gevonden die voldoen aan je criteria"
+  },
+  "cart": {
+    "title": "Winkelwagen",
+    "empty": "Je winkelwagen is leeg",
+    "startShopping": "Begin met Winkelen",
+    "item": "Product",
+    "quantity": "Aantal",
+    "price": "Prijs",
+    "subtotal": "Subtotaal",
+    "shipping": "Verzending",
+    "tax": "BTW",
+    "total": "Totaal",
+    "proceedToCheckout": "Ga naar Afrekenen",
+    "continueShopping": "Verder Winkelen",
+    "removeItem": "Product verwijderen",
+    "updateQuantity": "Aantal bijwerken"
+  },
+  "admin": {
+    "dashboard": "Dashboard",
+    "orders": "Bestellingen",
+    "bracelets": "Armbanden",
+    "charms": "Charmes",
+    "beads": "Kralen",
+    "chains": "Kettingen",
+    "login": "Admin Login",
+    "logout": "Uitloggen",
+    "ordersManagement": "Bestellingen Beheer",
+    "monitorOrders": "Bestellingen monitoren en beheren",
+    "cleanupDuplicates": "Duplicaten Opruimen",
+    "exportOrders": "Exporteer Bestellingen",
+    "orderNumber": "Bestelnummer",
+    "customer": "Klant",
+    "status": "Status",
+    "total": "Totaal",
+    "date": "Datum",
+    "actions": "Acties"
+  }
+}

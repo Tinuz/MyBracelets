@@ -66,10 +66,22 @@ export default function AdminOrdersPage() {
 
       if (response.ok) {
         const data = await response.json();
-        setOrders(data);
+        // Handle both old format (direct array) and new format (object with orders array)
+        if (Array.isArray(data)) {
+          setOrders(data);
+        } else if (data && Array.isArray(data.orders)) {
+          setOrders(data.orders);
+        } else {
+          console.error('Expected array or {orders: []} but got:', typeof data, data);
+          setOrders([]);
+        }
+      } else {
+        console.error('Failed to fetch orders, status:', response.status);
+        setOrders([]);
       }
     } catch (error) {
       console.error('Failed to fetch orders:', error);
+      setOrders([]);
     } finally {
       setLoading(false);
     }
@@ -88,9 +100,12 @@ export default function AdminOrdersPage() {
       });
 
       if (response.ok) {
-        setOrders(orders.map(order => 
-          order.id === orderId ? { ...order, status: newStatus } : order
-        ));
+        // Ensure orders is array before mapping
+        if (Array.isArray(orders)) {
+          setOrders(orders.map(order => 
+            order.id === orderId ? { ...order, status: newStatus } : order
+          ));
+        }
         if (selectedOrder && selectedOrder.id === orderId) {
           setSelectedOrder({ ...selectedOrder, status: newStatus });
         }
@@ -128,12 +143,15 @@ export default function AdminOrdersPage() {
     }
   };
 
+  // Ensure orders is always an array
+  const safeOrders = Array.isArray(orders) ? orders : [];
+  
   const filteredOrders = filterStatus === 'ALL' 
-    ? orders 
-    : orders.filter(order => order.status === filterStatus);
+    ? safeOrders 
+    : safeOrders.filter(order => order.status === filterStatus);
 
   const orderStats = ORDER_STATUSES.reduce((acc, status) => {
-    acc[status] = orders.filter(o => o.status === status).length;
+    acc[status] = safeOrders.filter(o => o.status === status).length;
     return acc;
   }, {} as Record<OrderStatus, number>);
 

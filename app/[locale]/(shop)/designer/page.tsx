@@ -71,7 +71,34 @@ export default function DesignerPage() {
   const [selectedChain, setSelectedChain] = useState<ChainType | null>(null);
 
   const handleConfigChange = (key: keyof BraceletConfig, value: any) => {
-    setConfig(prev => ({ ...prev, [key]: value }));
+    setConfig(prev => {
+      const newConfig = { ...prev, [key]: value };
+      
+      // Set default values when switching bracelet types
+      if (key === 'braceletType') {
+        if (value === 'BEADS') {
+          // Set default bead size if not already set
+          if (!prev.beadSize) {
+            newConfig.beadSize = 4.0;
+          }
+          // Clear chain/metal specific properties
+          delete newConfig.metalType;
+          delete newConfig.chainType;
+        } else if (value === 'CHAIN') {
+          // Set default metal and chain type if not already set
+          if (!prev.metalType) {
+            newConfig.metalType = 'GOLD';
+          }
+          if (!prev.chainType) {
+            newConfig.chainType = 'CABLE';
+          }
+          // Clear bead specific properties
+          delete newConfig.beadSize;
+        }
+      }
+      
+      return newConfig;
+    });
   };
 
   const handleChainImageClick = (chainType: ChainType) => {

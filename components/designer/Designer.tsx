@@ -63,17 +63,7 @@ interface DesignerProps {
 import BeadsDesigner from './BeadsDesigner';
 
 export default function Designer({ braceletSlug, config }: DesignerProps) {
-  // Check if this is a beads bracelet
-  if (braceletSlug === 'beads-bracelet') {
-    return (
-      <BeadsDesigner 
-        braceletSlug={braceletSlug} 
-        beadSize={config.beadSize || 4.0} 
-        braceletLength={config.length}
-      />
-    );
-  }
-  // Refs for SVG manipulation
+  // Refs for SVG manipulation (must be declared before any conditional returns)
   const pathRef = useRef<SVGPathElement | null>(null);
   const svgRef = useRef<SVGSVGElement | null>(null);
   
@@ -90,6 +80,9 @@ export default function Designer({ braceletSlug, config }: DesignerProps) {
 
   // Load initial data
   useEffect(() => {
+    // Skip loading if this is a beads bracelet (handled by BeadsDesigner)
+    if (braceletSlug === 'beads-bracelet') return;
+    
     async function loadData() {
       try {
         setLoading(true);
@@ -339,6 +332,17 @@ export default function Designer({ braceletSlug, config }: DesignerProps) {
       setError(err instanceof Error ? err.message : 'Failed to add to cart');
     }
   }, [bracelet, charms, placements, pricing]);
+
+  // Check if this is a beads bracelet (after all hooks are declared)
+  if (braceletSlug === 'beads-bracelet') {
+    return (
+      <BeadsDesigner 
+        braceletSlug={braceletSlug} 
+        beadSize={config.beadSize || 4.0} 
+        braceletLength={config.length}
+      />
+    );
+  }
 
   if (loading) {
     return (

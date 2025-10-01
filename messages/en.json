@@ -1,0 +1,228 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "continue": "Continue",
+    "addToCart": "Add to Cart",
+    "viewCart": "View Cart",
+    "checkout": "Checkout",
+    "price": "Price",
+    "total": "Total",
+    "quantity": "Quantity",
+    "tagline": "Handcrafted jewelry",
+    "designNow": "Design Now",
+    "designYourBracelet": "Design Your Bracelet"
+  },
+  "navigation": {
+    "home": "Home",
+    "collection": "Collection",
+    "designer": "Designer", 
+    "about": "About",
+    "contact": "Contact",
+    "cart": "Cart",
+    "account": "Account"
+  },
+  "homepage": {
+    "hero": {
+      "badge": "Handcrafted Jewelry",
+      "title": "Design Your",
+      "subtitle": "Perfect Bracelet",
+      "description": "Create a unique bracelet with our interactive designer. Combine charms, beads and colors for endless possibilities.",
+      "ctaStart": "Start Designing", 
+      "ctaCollection": "View Collection",
+      "trustIndicator1": "Premium Quality",
+      "trustIndicator2": "Fast Delivery"
+    },
+    "steps": {
+      "step1": {
+        "title": "Choose Your Base",
+        "description": "Select from our beautiful base bracelets in various styles and colors"
+      },
+      "step2": {
+        "title": "Add Charms",
+        "description": "Drag charms to your bracelet and place them exactly where you want"
+      },
+      "step3": {
+        "title": "Order",
+        "description": "Save your design and go to checkout. We'll make your unique bracelet"
+      }
+    },
+    "howItWorks": {
+      "badge": "How It Works",
+      "title": "In 3 Simple Steps",
+      "description": "From concept to creation - discover how easy it is to make your dream bracelet"
+    },
+    "whyDesigner": {
+      "title": "Why Our Designer Tool?",
+      "feature1": {
+        "title": "Real-time Visualization",
+        "description": "See exactly how your bracelet will look while designing"
+      },
+      "feature2": {
+        "title": "Smart Pricing",
+        "description": "Automatic discounts for 5+ charms (5%) or 10+ charms (10%)"
+      },
+      "feature3": {
+        "title": "Unlimited Possibilities", 
+        "description": "Combine chains, beads and charms for unique creations"
+      },
+      "cta": "Try Now Free"
+    },
+    "usps": {
+      "title": "Why La Nina Bracelets?",
+      "description": "Discover what sets us apart in the world of handcrafted jewelry",
+      "usp1": {
+        "title": "Interactive Design",
+        "description": "Real-time visual designer with drag & drop charm positioning for perfect control"
+      },
+      "usp2": {
+        "title": "Premium Quality",
+        "description": "High-quality materials and careful craftsmanship for lasting jewelry"
+      },
+      "usp3": {
+        "title": "Fast Delivery",
+        "description": "Safe and fast delivery directly to your home within 2-3 business days"
+      },
+      "usp4": {
+        "title": "Smart Pricing",
+        "description": "Volume discounts: 5% off with 5+ charms, 10% off with 10+ charms"
+      }
+    },
+    "socialProof": {
+      "customers": "Happy Customers",
+      "bracelets": "Bracelets Made",
+      "rating": "Average Review"
+    },
+    "reviews": {
+      "badge": "Customer Reviews",
+      "title": "What Our Customers Say",
+      "review1": {
+        "quote": "So happy with my bracelet! The designer tool was super easy to use and the result is even more beautiful than I expected."
+      },
+      "review2": {
+        "quote": "Perfect quality and fast delivery! I've already ordered three bracelets for friends and family."
+      },
+      "review3": {
+        "quote": "The charms are of amazing quality and the bracelet fits perfectly. Absolute recommendation!"
+      }
+    },
+    "finalCta": {
+      "title": "Ready To Create",
+      "subtitle": "Something Beautiful?",
+      "description": "Start designing your perfect bracelet today. It only takes a few minutes!",
+      "ctaStart": "Start Your Design",
+      "ctaCollection": "View Collection",
+      "trustSignal1": "Free Shipping from $50",
+      "trustSignal2": "30 Day Return Guarantee"
+    }
+  },
+  "designer": {
+    "title": "Design Your Bracelet",
+    "subtitle": "Configure your perfect bracelet and create patterns",
+    "braceletType": "Bracelet Type",
+    "braceletTypeDescription": "Select between chain or beads bracelet",
+    "chainBracelet": "Chain Bracelet",
+    "chainDescription": "Traditional chain with charms",
+    "beadsBracelet": "Beads Bracelet", 
+    "beadsDescription": "Colorful beads pattern",
+    "selectMetal": "Select Metal",
+    "chainStyle": "Chain Style",
+    "chainStyleDescription": "Click on an image to see the pattern in detail",
+    "beadSize": "Bead Size",
+    "beadSizeDescription": "Choose the diameter of your beads",
+    "delicate": "Delicate",
+    "classic": "Classic",
+    "bold": "Bold",
+    "thickness": "Thickness",
+    "length": "Length",
+    "priceEstimate": "Price Estimate",
+    "baseBraceletPrice": "Base bracelet price (before charms)",
+    "baseBraceletPriceBeads": "Base bracelet price (before beads & charms)",
+    "continueToAddCharms": "Continue to Add Charms",
+    "continueToDesignBeads": "Continue to Design Beads",
+    "backToHome": "Back to Home"
+  },
+  "beadsDesigner": {
+    "title": "Design Your Beads Bracelet",
+    "subtitle": "Drag beads from the palette to create your pattern",
+    "beadsPalette": "Beads Palette",
+    "braceletCanvas": "Bracelet Canvas",
+    "dropBeadsHere": "Drop beads here to create your pattern",
+    "braceletPreview": "Bracelet Preview",
+    "dropBeadsStart": "Drop beads here to start designing",
+    "patternSummary": "Pattern Summary",
+    "beadsUsed": "Beads Used",
+    "maxCapacity": "Max Capacity",
+    "beadSize": "Bead Size",
+    "length": "Length",
+    "placedBeads": "Placed Beads",
+    "priceSummary": "Price Summary",
+    "basedOnBeads": "Based on {count} beads",
+    "wantToAddCharms": "Want to add charms to your bracelet?",
+    "addCharms": "Add Charms",
+    "completeWithoutCharms": "Complete without Charms",
+    "backToConfiguration": "Back to Configuration"
+  },
+  "bracelets": {
+    "title": "Our Bracelet Collection",
+    "subtitle": "Discover our handcrafted bracelets",
+    "filterBy": "Filter by",
+    "sortBy": "Sort by",
+    "allTypes": "All Types",
+    "chainBracelets": "Chain Bracelets",
+    "beadBracelets": "Bead Bracelets",
+    "charmBracelets": "Charm Bracelets",
+    "priceRange": "Price Range",
+    "sortPriceLowHigh": "Price: Low to High",
+    "sortPriceHighLow": "Price: High to Low",
+    "sortNewest": "Newest First",
+    "sortPopular": "Most Popular",
+    "startingAt": "Starting at",
+    "customizeNow": "Customize Now",
+    "viewDetails": "View Details",
+    "noResults": "No bracelets found matching your criteria"
+  },
+  "cart": {
+    "title": "Shopping Cart",
+    "empty": "Your cart is empty",
+    "startShopping": "Start Shopping",
+    "item": "Item",
+    "quantity": "Quantity",
+    "price": "Price",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "tax": "Tax",
+    "total": "Total",
+    "proceedToCheckout": "Proceed to Checkout",
+    "continueShopping": "Continue Shopping",
+    "removeItem": "Remove item",
+    "updateQuantity": "Update quantity"
+  },
+  "admin": {
+    "dashboard": "Dashboard",
+    "orders": "Orders",
+    "bracelets": "Bracelets",
+    "charms": "Charms",
+    "beads": "Beads",
+    "chains": "Chains",
+    "login": "Admin Login",
+    "logout": "Logout",
+    "ordersManagement": "Orders Management",
+    "monitorOrders": "Monitor and manage customer orders",
+    "cleanupDuplicates": "Cleanup Duplicates",
+    "exportOrders": "Export Orders",
+    "orderNumber": "Order Number",
+    "customer": "Customer",
+    "status": "Status",
+    "total": "Total",
+    "date": "Date",
+    "actions": "Actions"
+  }
+}

@@ -49,11 +49,11 @@ export default function SuccessPage({ searchParams }: PageProps) {
             )}
             
             <div className="space-y-4">
-              <h3 className="font-semibold">What's Next?</h3>
+              <h3 className="font-semibold">What&apos;s Next?</h3>
               <ul className="text-left space-y-2 text-gray-600">
                 <li className="flex items-center">
                   <span className="text-green-500 mr-2">📧</span>
-                  You'll receive an order confirmation email shortly
+                  You&apos;ll receive an order confirmation email shortly
                 </li>
                 <li className="flex items-center">
                   <span className="text-blue-500 mr-2">🔨</span>

@@ -150,7 +150,7 @@ function CheckoutSuccessContent() {
           {/* What's Next */}
           <Card className="mb-8">
             <CardHeader>
-              <h3 className="text-lg font-semibold">What's Next?</h3>
+              <h3 className="text-lg font-semibold">What&apos;s Next?</h3>
             </CardHeader>
             <CardContent className="space-y-3 text-left">
               <div className="flex items-start space-x-3">
@@ -159,7 +159,7 @@ function CheckoutSuccessContent() {
                 </div>
                 <div>
                   <div className="font-medium">Order Confirmation</div>
-                  <div className="text-sm text-gray-500">You'll receive an email confirmation shortly</div>
+                  <div className="text-sm text-gray-500">You&apos;ll receive an email confirmation shortly</div>
                 </div>
               </div>
               

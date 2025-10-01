@@ -87,7 +87,7 @@ export default function BraceletDetailPage() {
             {error || 'Bracelet Not Found'}
           </h1>
           <p className="text-gray-600 mb-6">
-            The bracelet you're looking for doesn't exist or has been removed.
+            The bracelet you&apos;re looking for doesn&apos;t exist or has been removed.
           </p>
           <SecondaryButton asChild>
             <Link href="/bracelets">Back to Bracelets</Link>

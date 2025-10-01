@@ -1,35 +1,34 @@
-import './globals.css'
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-import { Navbar } from '@/components/ui/Navbar'
+import type { Metadata } from "next";
+import { Inter, Playfair_Display } from "next/font/google";
+import "./globals.css";
 
-const inter = Inter({ subsets: ['latin'] })
+const inter = Inter({ 
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: 'swap',
+});
+
+const playfair = Playfair_Display({ 
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
-  title: 'Bracelet Designer - Create Your Custom Bracelet',
-  description: 'Design your perfect bracelet with our interactive charm placement tool. Choose from a variety of charms and create something truly unique.',
-}
+  title: "La Nina Bracelets - Handgemaakte Sieraden",
+  description: "Ontwerp je perfecte bracelet met onze interactieve designer. Premium handgemaakte sieraden met charms, beads en ketten.",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        <Navbar />
-        
-        <main>{children}</main>
-        
-        <footer className="bg-gray-50 border-t mt-16">
-          <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-            <div className="text-center text-gray-500">
-              <p>&copy; 2024 La Nina Bracelets. All rights reserved.</p>
-            </div>
-          </div>
-        </footer>
+    <html lang="nl">
+      <body className={`${inter.variable} ${playfair.variable} font-sans antialiased`}>
+        {children}
       </body>
     </html>
-  )
+  );
 }

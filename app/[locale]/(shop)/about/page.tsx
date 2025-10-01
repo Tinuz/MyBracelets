@@ -36,7 +36,7 @@ export default function AboutPage() {
                   La Nina Bracelets was founded with a simple vision: to make beautiful, personalized jewelry accessible to everyone. Our innovative design platform allows customers to create truly unique pieces that reflect their personal style and story.
                 </p>
                 <p className="text-gray-700 leading-relaxed">
-                  We combine traditional craftsmanship with modern technology, offering an interactive design experience that lets you visualize your bracelet before it's created.
+                  We combine traditional craftsmanship with modern technology, offering an interactive design experience that lets you visualize your bracelet before it&apos;s created.
                 </p>
               </CardContent>
             </Card>
