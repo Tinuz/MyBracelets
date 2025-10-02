@@ -13,6 +13,7 @@ interface Chain {
   type: string;
   description: string;
   priceCents: number;
+  lengthMm: number;
   thickness: number;
   metalType: string;
   imageUrl?: string;
@@ -232,6 +233,7 @@ export default function AdminChainsPage() {
                       <th className="text-left py-3 px-4">Name</th>
                       <th className="text-left py-3 px-4">Type</th>
                       <th className="text-left py-3 px-4">Metal</th>
+                      <th className="text-left py-3 px-4">Length</th>
                       <th className="text-left py-3 px-4">Thickness</th>
                       <th className="text-left py-3 px-4">Price</th>
                       <th className="text-left py-3 px-4">Status</th>
@@ -270,6 +272,7 @@ export default function AdminChainsPage() {
                             {chain.metalType.replace(/_/g, ' ')}
                           </span>
                         </td>
+                        <td className="py-3 px-4">{chain.lengthMm}mm</td>
                         <td className="py-3 px-4">{chain.thickness}mm</td>
                         <td className="py-3 px-4">
                           €{(chain.priceCents / 100).toFixed(2)}
@@ -351,6 +354,7 @@ function ChainForm({ chain, onSave, onCancel }: ChainFormProps) {
     type: chain?.type || 'CABLE',
     description: chain?.description || '',
     priceCents: chain?.priceCents || 0,
+    lengthMm: chain?.lengthMm || 180,
     thickness: chain?.thickness || 2.0,
     metalType: chain?.metalType || 'GOLD',
     imageUrl: chain?.imageUrl || '',
@@ -452,6 +456,36 @@ function ChainForm({ chain, onSave, onCancel }: ChainFormProps) {
           rows={3}
           placeholder="Describe the chain style and characteristics..."
         />
+      </div>
+
+      {/* Length Selection */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Chain Length
+        </label>
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+          {[
+            { mm: 160, label: '16cm - Tight fit', description: 'Perfect for wrist size 128-144mm' },
+            { mm: 180, label: '18cm - Standard', description: 'Perfect for wrist size 144-162mm' },
+            { mm: 200, label: '20cm - Comfortable', description: 'Perfect for wrist size 160-180mm' },
+            { mm: 220, label: '22cm - Loose fit', description: 'Perfect for wrist size 176-198mm' }
+          ].map((option) => (
+            <button
+              key={option.mm}
+              type="button"
+              onClick={() => setFormData({ ...formData, lengthMm: option.mm })}
+              className={`p-3 border rounded-lg text-left transition-all ${
+                formData.lengthMm === option.mm
+                  ? 'border-blue-500 bg-blue-50 text-blue-700'
+                  : 'border-gray-300 hover:border-gray-400'
+              }`}
+              title={option.description}
+            >
+              <div className="font-medium text-sm">{option.label}</div>
+              <div className="text-xs text-gray-500 mt-1">{option.mm}mm</div>
+            </button>
+          ))}
+        </div>
       </div>
 
       {/* Price and Thickness */}

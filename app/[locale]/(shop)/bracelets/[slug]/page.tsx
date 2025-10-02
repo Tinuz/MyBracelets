@@ -37,27 +37,27 @@ export default function BraceletDetailPage() {
   const [selectedImage, setSelectedImage] = useState(0);
 
   useEffect(() => {
+    const fetchBracelet = async () => {
+      try {
+        const res = await fetch(`/api/bracelets/${slug}`);
+        if (res.ok) {
+          const data = await res.json();
+          setBracelet(data);
+        } else if (res.status === 404) {
+          setError('Bracelet not found');
+        } else {
+          setError('Failed to load bracelet');
+        }
+      } catch (error) {
+        console.error('Error fetching bracelet:', error);
+        setError('Failed to load bracelet');
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchBracelet();
   }, [slug]);
-
-  const fetchBracelet = async () => {
-    try {
-      const res = await fetch(`/api/bracelets/${slug}`);
-      if (res.ok) {
-        const data = await res.json();
-        setBracelet(data);
-      } else if (res.status === 404) {
-        setError('Bracelet not found');
-      } else {
-        setError('Failed to load bracelet');
-      }
-    } catch (error) {
-      console.error('Error fetching bracelet:', error);
-      setError('Failed to load bracelet');
-    } finally {
-      setLoading(false);
-    }
-  };
 
   if (loading) {
     return (
@@ -312,25 +312,25 @@ function RelatedProducts({ currentBraceletId, braceletType }: {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const fetchRelatedBracelets = async () => {
+      try {
+        const res = await fetch('/api/bracelets');
+        if (res.ok) {
+          const allBracelets = await res.json();
+          const related = allBracelets
+            .filter((b: Bracelet) => b.id !== currentBraceletId && b.braceletType === braceletType)
+            .slice(0, 4);
+          setRelatedBracelets(related);
+        }
+      } catch (error) {
+        console.error('Error fetching related bracelets:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchRelatedBracelets();
   }, [currentBraceletId, braceletType]);
-
-  const fetchRelatedBracelets = async () => {
-    try {
-      const res = await fetch('/api/bracelets');
-      if (res.ok) {
-        const allBracelets = await res.json();
-        const related = allBracelets
-          .filter((b: Bracelet) => b.id !== currentBraceletId && b.braceletType === braceletType)
-          .slice(0, 4);
-        setRelatedBracelets(related);
-      }
-    } catch (error) {
-      console.error('Error fetching related bracelets:', error);
-    } finally {
-      setLoading(false);
-    }
-  };
 
   if (loading || relatedBracelets.length === 0) {
     return null;

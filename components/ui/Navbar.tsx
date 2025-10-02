@@ -6,13 +6,14 @@ import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { getCartCount } from '@/lib/cart';
 import { cn } from '@/lib/utils';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { Button, Badge } from '@/components/ui';
 import { MiniCart } from './MiniCart';
 import LanguageSwitcher from '@/components/LanguageSwitcher';
 
 export function Navbar() {
   const t = useTranslations();
+  const locale = useLocale();
   const [cartCount, setCartCount] = useState(0);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isMiniCartOpen, setIsMiniCartOpen] = useState(false);
@@ -64,10 +65,10 @@ export function Navbar() {
   }, []);
 
   const navItems = [
-    { href: '/', label: t('navigation.home') },
-    { href: '/bracelets', label: t('navigation.collection') },
-    { href: '/designer', label: t('navigation.designer') },
-    { href: '/about', label: t('navigation.about') },
+    { href: `/${locale}`, label: t('navigation.home') },
+    { href: `/${locale}/bracelets`, label: t('navigation.collection') },
+    { href: `/${locale}/designer`, label: t('navigation.designer') },
+    { href: `/${locale}/about`, label: t('navigation.about') },
   ];
 
   const isActive = (href: string) => {
@@ -92,7 +93,7 @@ export function Navbar() {
           {/* Logo / Brand */}
           <div className="flex items-center">
             <Link 
-              href="/" 
+              href={`/${locale}`} 
               className="flex items-center space-x-3 hover:opacity-80 transition-opacity group"
             >
               <div className="relative w-10 h-10 overflow-hidden rounded-xl">
@@ -202,7 +203,7 @@ export function Navbar() {
                 size="default"
                 className="shadow-soft hover:shadow-medium"
               >
-                <Link href="/designer">
+                <Link href={`/${locale}/designer`}>
                   {t('common.designNow')}
                 </Link>
               </Button>
@@ -264,7 +265,7 @@ export function Navbar() {
                   
                   {/* Mobile Cart Link */}
                   <Link
-                    href="/cart"
+                    href={`/${locale}/cart`}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={cn(
                       "flex items-center justify-between px-4 py-3 rounded-2xl text-base font-medium transition-all duration-200",
@@ -305,7 +306,7 @@ export function Navbar() {
                       size="lg"
                       className="w-full justify-center shadow-soft"
                     >
-                      <Link href="/designer" onClick={() => setIsMobileMenuOpen(false)}>
+                      <Link href={`/${locale}/designer`} onClick={() => setIsMobileMenuOpen(false)}>
                         {t('common.designYourBracelet')}
                       </Link>
                     </Button>

@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { useLocale } from 'next-intl'
 import { Card, CardContent, CardHeader } from '@/components/ui/Common'
 import { PrimaryButton } from '@/components/ui/Button'
 
@@ -11,6 +12,7 @@ interface PageProps {
 
 export default function SuccessPage({ searchParams }: PageProps) {
   const { design, mock } = searchParams
+  const locale = useLocale()
   
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center py-12 px-4">
@@ -82,13 +84,13 @@ export default function SuccessPage({ searchParams }: PageProps) {
             
             <div className="flex flex-col sm:flex-row gap-4 pt-6">
               <PrimaryButton className="flex-1" asChild>
-                <Link href="/bracelets">
+                <Link href={`/${locale}/bracelets`}>
                   Design Another Bracelet
                 </Link>
               </PrimaryButton>
               
               <PrimaryButton variant="outline" className="flex-1" asChild>
-                <Link href="/">
+                <Link href={`/${locale}/`}>
                   Return Home
                 </Link>
               </PrimaryButton>

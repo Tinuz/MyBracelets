@@ -3,11 +3,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button, Card, CardContent, CardHeader, Section, Stepper, Badge } from '@/components/ui';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import type { Step } from '@/components/ui';
 
 export default function HomePage() {
   const t = useTranslations();
+  const locale = useLocale();
   const howItWorksSteps: Step[] = [
     {
       id: '1',
@@ -68,7 +69,7 @@ export default function HomePage() {
                   className="shadow-brand hover:shadow-medium bg-white text-primary-600 hover:bg-neutral-50"
                   asChild
                 >
-                  <Link href="/designer">
+                  <Link href={`/${locale}/designer`}>
                     🎨 {t('homepage.hero.ctaStart')}
                   </Link>
                 </Button>
@@ -79,7 +80,7 @@ export default function HomePage() {
                   className="border-white/30 text-white hover:bg-white/10"
                   asChild
                 >
-                  <Link href="/bracelets">
+                  <Link href={`/${locale}/bracelets`}>
                     💎 {t('homepage.hero.ctaCollection')}
                   </Link>
                 </Button>
@@ -190,7 +191,7 @@ export default function HomePage() {
 
             <div className="mt-8">
               <Button variant="gradient" size="lg" asChild>
-                <Link href="/designer">
+                <Link href={`/${locale}/designer`}>
                   {t('homepage.whyDesigner.cta')}
                 </Link>
               </Button>
@@ -399,7 +400,7 @@ export default function HomePage() {
               className="shadow-brand hover:shadow-medium bg-white text-primary-600 hover:bg-neutral-50"
               asChild
             >
-              <Link href="/designer">
+              <Link href={`/${locale}/designer`}>
                 🎨 {t('homepage.finalCta.ctaStart')}
               </Link>
             </Button>
@@ -410,7 +411,7 @@ export default function HomePage() {
               className="border-white/30 text-white hover:bg-white/10"
               asChild
             >
-              <Link href="/bracelets">
+              <Link href={`/${locale}/bracelets`}>
                 💎 {t('homepage.finalCta.ctaCollection')}
               </Link>
             </Button>

@@ -1,8 +1,10 @@
 import { Card, CardContent, CardHeader } from '@/components/ui/Common';
 import { PrimaryButton } from '@/components/ui/Button';
 import Link from 'next/link';
+import { useLocale } from 'next-intl';
 
 export default function AboutPage() {
+  const locale = useLocale();
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-50 to-purple-50">
       <div className="container mx-auto px-4 py-16">
@@ -158,7 +160,7 @@ export default function AboutPage() {
                 className="bg-white text-purple-600 hover:bg-gray-100"
                 asChild
               >
-                <Link href="/designer">
+                <Link href={`/${locale}/designer`}>
                   Start Designing
                 </Link>
               </PrimaryButton>
@@ -168,7 +170,7 @@ export default function AboutPage() {
                 className="border-white text-white hover:bg-white hover:text-purple-600"
                 asChild
               >
-                <Link href="/bracelets">
+                <Link href={`/${locale}/bracelets`}>
                   Browse Bracelets
                 </Link>
               </PrimaryButton>

@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "chains" ADD COLUMN     "lengthMm" INTEGER NOT NULL DEFAULT 180;

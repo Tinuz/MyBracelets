@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
+import { useTranslations } from 'next-intl';
 import { PrimaryButton, SecondaryButton } from "@/components/ui/Button";
 import { LoadingSpinner, Alert, Card, CardContent, CardHeader } from "@/components/ui/Common";
 import { addToCart } from "@/lib/cart";
@@ -57,6 +58,8 @@ export default function CharmonBeadsDesigner({
   braceletLength, 
   beadDesign 
 }: CharmonBeadsDesignerProps) {
+  const t = useTranslations('beadsDesigner');
+  
   // State
   const [charms, setCharms] = useState<Charm[]>([]);
   const [beads, setBeads] = useState<Bead[]>([]);
@@ -177,11 +180,14 @@ export default function CharmonBeadsDesigner({
           
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">
-              Add Charms to Your Beads Bracelet
+            <div className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-blue-100 text-blue-800 mb-4">
+              {t('beadsTitle', { default: 'Beads Designer' })} → Charms
+            </div>
+            <h1 className="text-4xl font-bold text-gray-900 mb-3">
+              {t('addCharmsTitle', { default: 'Add Charms to Your Beads Bracelet' })}
             </h1>
-            <p className="text-gray-600">
-              Drag charms to add them between your beads
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+              {t('addCharmsSubtitle', { default: 'Drag charms from the palette to add them between your beads for a personalized touch' })}
             </p>
           </div>
 
@@ -256,50 +262,149 @@ export default function CharmonBeadsDesigner({
                 <CardContent>
                   <div className="bg-gray-50 rounded-lg p-6">
                     
-                    {/* Bracelet Visualization */}
+                    {/* Bracelet Visualization - Linear Chain */}
                     <div className="mb-6">
-                      <div className="text-sm font-medium text-gray-700 mb-2">Complete Bracelet Preview</div>
-                      <div className="relative w-full h-8 bg-gradient-to-r from-gray-300 via-gray-200 to-gray-300 rounded-full flex items-center justify-center overflow-hidden">
-                        <div className="absolute inset-0 bg-gradient-to-r from-gray-400 via-gray-300 to-gray-400 rounded-full opacity-50"></div>
+                      <div className="text-sm font-medium text-gray-700 mb-3">{t('braceletPreview', { default: 'Bracelet Preview' })}</div>
+                      
+                      {/* Bracelet Canvas - Linear chain representation */}
+                      <div className="relative bg-gradient-to-b from-gray-100 to-gray-200 rounded-2xl p-6 border-2 border-gray-300 shadow-inner overflow-x-auto">
                         
-                        {/* Combined beads and charms */}
-                        <div className="flex items-center space-x-1 relative z-10">
-                          {Array.from({ length: Math.min(maxBeads, 15) }, (_, index) => {
-                            const beadPlacement = beadDesign.find(p => p.position === index);
-                            const bead = beadPlacement ? beads.find(b => b.id === beadPlacement.beadId) : null;
-                            const charmPlacement = charmPlacements.find(p => p.position === index);
+                        {/* Chain Background - Full width */}
+                        <div className="relative min-h-12 flex items-center">
+                          {/* Bracelet Elements Container */}
+                          <div className="relative z-10 flex items-center space-x-0 w-full">
+                            {/* Dynamic Chain Background - spans full width of beads */}
+                            <div className="absolute inset-y-0 left-0 right-0 bg-gradient-to-r from-gray-400 via-gray-300 to-gray-400 rounded-full shadow-inner opacity-60 h-8 top-1/2 transform -translate-y-1/2"></div>
                             
-                            return (
-                              <div key={index} className="flex items-center space-x-1">
-                                {/* Charm before bead */}
-                                {charmPlacement && (
-                                  <div className="w-2 h-4 bg-yellow-500 rounded-sm" />
-                                )}
-                                
-                                {/* Bead */}
-                                {beadPlacement && bead ? (
-                                  <div className={`w-4 h-4 rounded-full border border-gray-400 ${
-                                    bead.color === 'RED' ? 'bg-red-500' :
-                                    bead.color === 'BLUE' ? 'bg-blue-500' :
-                                    bead.color === 'YELLOW' ? 'bg-yellow-500' :
-                                    bead.color === 'GREEN' ? 'bg-green-500' :
-                                    bead.color === 'GOLD' ? 'bg-yellow-400' :
-                                    'bg-gray-500'
-                                  }`} />
-                                ) : (
-                                  <div className="w-2 h-2 bg-gray-300 rounded-full" />
-                                )}
-                              </div>
-                            );
-                          })}
+                            {(() => {
+                              // Calculate dynamic bead dimensions based on available space
+                              const containerWidth = 430; // Approximate container width in pixels
+                              const padding = 32; // 16px on each side (px-4)
+                              const availableWidth = containerWidth - padding;
+                              
+                              // Account for charms space (estimate based on number of charms)
+                              const totalCharms = charmPlacements.length;
+                              const charmSpacePerCharm = 12; // width + margins
+                              const totalCharmSpace = totalCharms * charmSpacePerCharm;
+                              
+                              // Remaining space for beads
+                              const beadSpaceAvailable = availableWidth - totalCharmSpace;
+                              const beadWidth = Math.max(8, Math.min(24, Math.floor(beadSpaceAvailable / maxBeads)));
+                              const beadHeight = Math.max(12, beadWidth * 1.5);
+                              const charmHeight = beadHeight + 8; // Charm slightly taller than bead
+                              
+                              return (
+                                <div className="relative flex items-center space-x-0 px-4">
+                                  {/* Start charm position */}
+                                  {(() => {
+                                    const startCharm = charmPlacements.find(p => p.position === 0);
+                                    return startCharm ? (
+                                      <div 
+                                        className="bg-gradient-to-b from-yellow-400 to-yellow-600 rounded-sm shadow-md border border-yellow-600 mr-1"
+                                        style={{ width: '8px', height: `${charmHeight}px` }}
+                                        title={charms.find(c => c.id === startCharm.charmId)?.name || 'Charm'} 
+                                      />
+                                    ) : null;
+                                  })()}
+                                  
+                                  {/* Beads with charms between them */}
+                                  {Array.from({ length: maxBeads }, (_, beadIndex) => {
+                                    const beadPlacement = beadDesign.find(p => p.position === beadIndex);
+                                    const bead = beadPlacement ? beads.find(b => b.id === beadPlacement.beadId) : null;
+                                    const charmAfterBead = charmPlacements.find(p => p.position === beadIndex + 1);
+                                    
+                                    return (
+                                      <React.Fragment key={beadIndex}>
+                                        {/* Bead - dynamic size */}
+                                        <div className="flex-shrink-0">
+                                          {beadPlacement && bead ? (
+                                            <div 
+                                              className="rounded-full border border-gray-500 shadow-sm overflow-hidden"
+                                              style={{
+                                                width: `${beadWidth}px`,
+                                                height: `${beadHeight}px`,
+                                                backgroundColor: bead.colorHex || '#6B7280',
+                                                backgroundImage: 'none'
+                                              }}
+                                              title={`${bead.name} (${beadIndex + 1})`}
+                                            />
+                                          ) : (
+                                            <div 
+                                              className="bg-gray-300 border border-gray-400 rounded-full opacity-60"
+                                              style={{
+                                                width: `${beadWidth}px`,
+                                                height: `${beadHeight}px`
+                                              }}
+                                            />
+                                          )}
+                                        </div>
+                                        
+                                        {/* Charm after this bead */}
+                                        {charmAfterBead && (
+                                          <div 
+                                            className="bg-gradient-to-b from-yellow-400 to-yellow-600 rounded-sm shadow-md border border-yellow-600 mx-1"
+                                            style={{
+                                              width: '8px',
+                                              height: `${charmHeight}px`
+                                            }}
+                                            title={charms.find(c => c.id === charmAfterBead.charmId)?.name || 'Charm'} 
+                                          />
+                                        )}
+                                      </React.Fragment>
+                                    );
+                                  })}
+                                </div>
+                              );
+                            })()}
+                          </div>
+                        </div>
+                        
+                        {/* Scroll indicator for long bracelets */}
+                        {maxBeads > 25 && (
+                          <div className="text-center mt-3">
+                            <span className="text-xs text-gray-500 flex items-center justify-center gap-2">
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16l-4-4m0 0l4-4m-4 4h18" />
+                              </svg>
+                              Scroll to see full bracelet
+                              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                              </svg>
+                            </span>
+                          </div>
+                        )}
+                        
+                        {/* Legend */}
+                        <div className="flex justify-center items-center space-x-6 text-xs text-gray-600 bg-white/50 rounded-lg p-3 mt-4">
+                          <div className="flex items-center space-x-2">
+                            <div className="w-4 h-6 bg-teal-500 rounded-sm border border-gray-500"></div>
+                            <span>Bead</span>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <div className="w-3 h-8 bg-gradient-to-b from-yellow-400 to-yellow-600 rounded-sm border border-yellow-600"></div>
+                            <span>Charm</span>
+                          </div>
+                          <div className="flex items-center space-x-2">
+                            <div className="w-8 h-2 bg-gradient-to-r from-gray-400 via-gray-300 to-gray-400 rounded-full"></div>
+                            <span>Chain</span>
+                          </div>
+                        </div>
+                        
+                        {/* Bracelet Info */}
+                        <div className="mt-3 flex justify-between items-center text-xs text-gray-600">
+                          <span>{beadDesign.length} {t('beads', { default: 'beads' })}</span>
+                          <span>{charmPlacements.length} charms</span>
+                          <span>{braceletLength}mm {t('length', { default: 'length' })}</span>
                         </div>
                       </div>
                     </div>
                     
+
+
                     {/* Charm Drop Zones */}
                     <div className="space-y-4">
                       <div className="text-sm font-medium text-gray-700">Charm Positions</div>
-                      <div className="grid grid-cols-6 gap-2">
+                      <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-2">
                         {Array.from({ length: Math.min(availableCharmPositions, 18) }, (_, index) => {
                           const charmPlacement = charmPlacements.find(p => p.position === index);
                           const charm = charmPlacement ? charms.find(c => c.id === charmPlacement.charmId) : null;
@@ -307,7 +412,7 @@ export default function CharmonBeadsDesigner({
                           return (
                             <div
                               key={index}
-                              className={`relative w-16 h-16 border-2 rounded-lg flex items-center justify-center transition-all duration-200 ${
+                              className={`relative w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 border-2 rounded-lg flex items-center justify-center transition-all duration-200 ${
                                 dragOverPosition === index 
                                   ? 'border-blue-500 bg-blue-100 scale-110 shadow-lg' 
                                   : 'border-gray-300 bg-gray-50 hover:bg-gray-100'
@@ -345,13 +450,13 @@ export default function CharmonBeadsDesigner({
                                       alt={charm.name}
                                       width={40}
                                       height={40}
-                                      className="object-cover rounded-lg"
+                                      className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 object-cover rounded-lg"
                                       onError={(e) => {
                                         e.currentTarget.style.display = 'none';
                                       }}
                                     />
                                   ) : (
-                                    <div className="w-10 h-10 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center text-white text-lg font-bold">
+                                    <div className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg flex items-center justify-center text-white text-sm sm:text-base md:text-lg font-bold">
                                       {charm.name.charAt(0)}
                                     </div>
                                   )}

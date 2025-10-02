@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { cn } from '@/lib/utils';
 import { Button, Badge } from '@/components/ui';
 import { getCart, removeFromCart, updateCartItemQuantity } from '@/lib/cart';
+import { useLocale } from 'next-intl';
 
 interface CartItem {
   id: string;
@@ -22,6 +23,7 @@ interface MiniCartProps {
 }
 
 export function MiniCart({ isOpen, onClose }: MiniCartProps) {
+  const locale = useLocale();
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -116,7 +118,7 @@ export function MiniCart({ isOpen, onClose }: MiniCartProps) {
                 size="sm"
                 onClick={onClose}
               >
-                <Link href="/bracelets">
+                <Link href={`/${locale}/bracelets`}>
                   Bekijk Collectie
                 </Link>
               </Button>
@@ -214,7 +216,7 @@ export function MiniCart({ isOpen, onClose }: MiniCartProps) {
                 className="w-full justify-center"
                 onClick={onClose}
               >
-                <Link href="/checkout">
+                <Link href={`/${locale}/checkout`}>
                   Afrekenen
                 </Link>
               </Button>
@@ -226,7 +228,7 @@ export function MiniCart({ isOpen, onClose }: MiniCartProps) {
                 className="w-full justify-center"
                 onClick={onClose}
               >
-                <Link href="/cart">
+                <Link href={`/${locale}/cart`}>
                   Bekijk Winkelwagen
                 </Link>
               </Button>

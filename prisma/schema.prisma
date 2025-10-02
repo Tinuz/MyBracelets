@@ -92,6 +92,7 @@ model Chain {
   type         ChainType    // CABLE, CURB, FIGARO, etc.
   description  String       @default("")
   priceCents   Int
+  lengthMm     Int          @default(180) // Chain length in millimeters (16cm=160, 18cm=180, 20cm=200, 22cm=220)
   thickness    Float        // Chain thickness in mm
   metalType    MetalType    // GOLD, SILVER, etc.
   imageUrl     String?      // Chain pattern image
