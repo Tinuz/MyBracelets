@@ -20,11 +20,11 @@ export default function Button({
   const baseClasses = "inline-flex items-center justify-center rounded-2xl text-sm font-medium transition-all duration-200 focus-brand disabled:pointer-events-none disabled:opacity-50 interactive-scale";
   
   const variantClasses = {
-    primary: "bg-gradient-brand text-white shadow-soft hover:shadow-medium",
-    secondary: "bg-white text-neutral-900 border-2 border-primary-200 hover:border-primary-300 shadow-soft",
-    outline: "border-2 border-primary-500 text-primary-600 hover:bg-primary-50",
+    primary: "bg-gradient-to-r from-primary-500 to-primary-600 text-white shadow-lg hover:shadow-xl hover:from-primary-600 hover:to-primary-700",
+    secondary: "bg-white text-primary-700 border-2 border-primary-400 hover:border-primary-500 hover:bg-primary-50 shadow-md",
+    outline: "border-2 border-primary-500 text-primary-700 hover:bg-primary-50",
     ghost: "text-primary-600 hover:bg-primary-50",
-    gradient: "bg-gradient-warm text-white shadow-soft hover:shadow-medium",
+    gradient: "bg-gradient-to-r from-primary-400 to-primary-600 text-white shadow-lg hover:shadow-xl",
   };
   
   const sizeClasses = {

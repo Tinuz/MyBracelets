@@ -33,14 +33,14 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen overflow-x-hidden">
-      {/* Hero Section - Redesigned */}
+      {/* Hero Section - Elegant Rose Gold Redesign */}
       <Section 
         variant="gradient" 
-        className="relative bg-gradient-to-br from-[#FF9B82] via-[#FF8B75] to-[#FFA589] min-h-[85vh] flex items-center overflow-hidden"
+        className="relative bg-gradient-to-br from-secondary-50 via-primary-100 to-primary-300 min-h-[85vh] flex items-center overflow-hidden"
       >
         {/* Subtle animated background pattern */}
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.8),transparent_50%)] animate-pulse" />
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(193,147,104,0.3),transparent_50%)] animate-pulse" />
         </div>
 
         <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10 w-full">
@@ -51,22 +51,22 @@ export default function HomePage() {
               
               {/* Badge */}
               <div className="inline-block">
-                <div className="px-6 py-2 bg-white/25 backdrop-blur-sm rounded-full border border-white/40 text-white text-sm font-medium shadow-lg">
+                <div className="px-6 py-2 bg-white/90 backdrop-blur-sm rounded-full border border-primary-300/50 text-primary-700 text-sm font-medium shadow-lg">
                   ✨ {t('homepage.hero.badge')}
                 </div>
               </div>
               
               {/* Main Heading */}
-              <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.1] tracking-tight">
+              <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-secondary-900 leading-[1.1] tracking-tight">
                 {t('homepage.hero.title')}
                 <br />
-                <span className="text-white/95">
+                <span className="text-primary-700">
                   {t('homepage.hero.subtitle')}
                 </span>
               </h1>
               
               {/* Description */}
-              <p className="text-lg md:text-xl text-white/90 leading-relaxed max-w-xl font-light">
+              <p className="text-lg md:text-xl text-secondary-800 leading-relaxed max-w-xl font-light">
                 {t('homepage.hero.description')}
               </p>
               
@@ -74,7 +74,7 @@ export default function HomePage() {
               <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Button 
                   size="xl" 
-                  className="shadow-xl hover:shadow-2xl bg-white text-orange-600 hover:bg-orange-50 font-semibold transition-all duration-300 hover:scale-105"
+                  className="shadow-xl hover:shadow-2xl bg-gradient-to-r from-primary-500 to-primary-600 text-white hover:from-primary-600 hover:to-primary-700 font-semibold transition-all duration-300 hover:scale-105"
                   asChild
                 >
                   <Link href={`/${locale}/designer`}>
@@ -86,7 +86,7 @@ export default function HomePage() {
                 <Button 
                   size="xl" 
                   variant="outline"
-                  className="border-2 border-white/40 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 font-semibold transition-all duration-300"
+                  className="border-2 border-primary-500 bg-white text-primary-700 hover:bg-primary-50 font-semibold transition-all duration-300"
                   asChild
                 >
                   <Link href={`/${locale}/bracelets`}>
@@ -97,11 +97,11 @@ export default function HomePage() {
 
               {/* Trust Indicators */}
               <div className="flex items-center gap-8 pt-4">
-                <div className="flex items-center gap-2 text-white/90">
+                <div className="flex items-center gap-2 text-secondary-800">
                   <ShieldCheckIcon className="w-5 h-5" />
                   <span className="text-sm font-medium">{t('homepage.hero.trustIndicator1')}</span>
                 </div>
-                <div className="flex items-center gap-2 text-white/90">
+                <div className="flex items-center gap-2 text-secondary-800">
                   <TruckIcon className="w-5 h-5" />
                   <span className="text-sm font-medium">{t('homepage.hero.trustIndicator2')}</span>
                 </div>
@@ -111,7 +111,7 @@ export default function HomePage() {
             {/* Hero Visual - Right Side */}
             <div className="relative lg:ml-8">
               {/* White card with shadow */}
-              <div className="relative bg-white rounded-3xl shadow-2xl p-8 md:p-12 transform lg:scale-105 hover:scale-110 transition-transform duration-500">
+              <div className="relative bg-white rounded-3xl shadow-2xl p-8 md:p-12 transform lg:scale-105 hover:scale-110 transition-transform duration-500 border border-primary-100">
                 {/* Logo */}
                 <div className="relative w-full aspect-square max-w-md mx-auto">
                   <Image
@@ -126,9 +126,9 @@ export default function HomePage() {
                 </div>
               </div>
               
-              {/* Decorative floating elements */}
-              <div className="absolute -top-6 -right-6 w-24 h-24 bg-yellow-400/30 rounded-full blur-2xl animate-pulse" />
-              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-pink-400/30 rounded-full blur-2xl animate-pulse delay-1000" />
+              {/* Decorative floating elements - updated to rose gold tones */}
+              <div className="absolute -top-6 -right-6 w-24 h-24 bg-primary-300/40 rounded-full blur-2xl animate-pulse" />
+              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-accent-rose/30 rounded-full blur-2xl animate-pulse delay-1000" />
             </div>
 
           </div>
@@ -136,15 +136,15 @@ export default function HomePage() {
       </Section>
 
       {/* How It Works Section */}
-      <Section id="how-it-works" className="bg-white">
+      <Section id="how-it-works" className="bg-secondary-50">
         <div className="text-center mb-16">
-          <Badge variant="primary" size="lg" className="mb-4">
+          <Badge variant="primary" size="lg" className="mb-4 bg-primary-100 text-primary-700 border-primary-300">
             ✨ {t('homepage.howItWorks.badge')}
           </Badge>
-          <h2 className="font-display text-3xl md:text-5xl font-bold text-neutral-900 mb-6">
+          <h2 className="font-display text-3xl md:text-5xl font-bold text-secondary-900 mb-6">
             {t('homepage.howItWorks.title')}
           </h2>
-          <p className="text-xl text-neutral-600 max-w-2xl mx-auto">
+          <p className="text-xl text-secondary-700 max-w-2xl mx-auto">
             {t('homepage.howItWorks.description')}
           </p>
         </div>

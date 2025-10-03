@@ -71,8 +71,132 @@ export default function BeadsDesigner({ braceletSlug, beadSize, braceletLength }
   const [suggestions, setSuggestions] = useState<DesignSuggestion[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
 
+  // Beads palette filtering state
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedColorCategory, setSelectedColorCategory] = useState<string | null>(null);
+  const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
+  const [favorites, setFavorites] = useState<Set<string>>(new Set());
+
   // Calculate how many beads fit on the bracelet
   const maxBeads = Math.floor(braceletLength / (beadSize + 1)); // +1 for spacing
+  
+  // Color categorization helper
+  const getColorCategory = (bead: Bead): string => {
+    const hex = bead.colorHex?.toLowerCase() || '';
+    const color = bead.color.toUpperCase();
+    
+    // RGB color analysis for better categorization
+    if (hex && hex.startsWith('#')) {
+      const r = parseInt(hex.slice(1, 3), 16);
+      const g = parseInt(hex.slice(3, 5), 16);
+      const b = parseInt(hex.slice(5, 7), 16);
+      
+      // Determine hue-based category
+      const max = Math.max(r, g, b);
+      const min = Math.min(r, g, b);
+      const diff = max - min;
+      
+      // Grayscale colors
+      if (diff < 30) {
+        if (max < 80) return 'blacks';
+        if (max < 160) return 'grays';
+        return 'whites';
+      }
+      
+      // Brown tones
+      if (r > 100 && g > 60 && b < 100 && Math.abs(r - g) < 60) {
+        return 'browns';
+      }
+      
+      // Color hues
+      if (r === max) {
+        if (g > b && g > 100) return 'oranges';
+        if (b > 150 && r > 200) return 'pinks';
+        return 'reds';
+      }
+      if (g === max) {
+        if (r > 100 && b < 100) return 'yellows';
+        if (b > 100) return 'teals';
+        return 'greens';
+      }
+      if (b === max) {
+        if (r > 100) return 'purples';
+        return 'blues';
+      }
+    }
+    
+    // Fallback to enum-based categorization
+    if (color.includes('RED') || color.includes('CORAL')) return 'reds';
+    if (color.includes('PINK') || color.includes('FUCHSIA')) return 'pinks';
+    if (color.includes('ORANGE') || color.includes('PEACH')) return 'oranges';
+    if (color.includes('YELLOW') || color.includes('GOLD')) return 'yellows';
+    if (color.includes('GREEN') || color.includes('EMERALD') || color.includes('SAGE')) return 'greens';
+    if (color.includes('TEAL') || color.includes('TURQUOISE')) return 'teals';
+    if (color.includes('BLUE') || color.includes('NAVY')) return 'blues';
+    if (color.includes('PURPLE') || color.includes('LAVENDER')) return 'purples';
+    if (color.includes('BROWN') || color.includes('COCOA') || color.includes('CHOCOLATE')) return 'browns';
+    if (color.includes('BLACK') || color.includes('CHARCOAL')) return 'blacks';
+    if (color.includes('WHITE') || color.includes('CREAM') || color.includes('IVORY')) return 'whites';
+    if (color.includes('GRAY') || color.includes('GREY') || color.includes('SILVER')) return 'grays';
+    
+    return 'others';
+  };
+  
+  // Filter and categorize beads
+  const filteredBeads = beads.filter(bead => {
+    const matchesSearch = searchQuery === '' || 
+      bead.name.toLowerCase().includes(searchQuery.toLowerCase());
+    const matchesCategory = !selectedColorCategory || 
+      getColorCategory(bead) === selectedColorCategory;
+    return matchesSearch && matchesCategory;
+  });
+  
+  // Group beads by color category
+  const beadsByCategory = filteredBeads.reduce((acc, bead) => {
+    const category = getColorCategory(bead);
+    if (!acc[category]) acc[category] = [];
+    acc[category].push(bead);
+    return acc;
+  }, {} as Record<string, Bead[]>);
+  
+  // Color category metadata
+  const colorCategories = [
+    { id: 'reds', label: 'Rood', icon: '🔴', color: '#DC2626' },
+    { id: 'pinks', label: 'Roze', icon: '💗', color: '#EC4899' },
+    { id: 'oranges', label: 'Oranje', icon: '🟠', color: '#EA580C' },
+    { id: 'yellows', label: 'Geel', icon: '🟡', color: '#FBBF24' },
+    { id: 'greens', label: 'Groen', icon: '🟢', color: '#059669' },
+    { id: 'teals', label: 'Turquoise', icon: '🩵', color: '#0D9488' },
+    { id: 'blues', label: 'Blauw', icon: '🔵', color: '#2563EB' },
+    { id: 'purples', label: 'Paars', icon: '🟣', color: '#7C3AED' },
+    { id: 'browns', label: 'Bruin', icon: '🟤', color: '#92400E' },
+    { id: 'blacks', label: 'Zwart', icon: '⚫', color: '#1F2937' },
+    { id: 'whites', label: 'Wit', icon: '⚪', color: '#F3F4F6' },
+    { id: 'grays', label: 'Grijs', icon: '⚪', color: '#6B7280' },
+    { id: 'others', label: 'Overig', icon: '✨', color: '#8B5CF6' },
+  ].filter(cat => beadsByCategory[cat.id]?.length > 0);
+  
+  // Sort favorites to top
+  const sortedFilteredBeads = [...filteredBeads].sort((a, b) => {
+    const aFav = favorites.has(a.id);
+    const bFav = favorites.has(b.id);
+    if (aFav && !bFav) return -1;
+    if (!aFav && bFav) return 1;
+    return 0;
+  });
+  
+  // Toggle favorite
+  const toggleFavorite = (beadId: string) => {
+    setFavorites(prev => {
+      const newFavorites = new Set(prev);
+      if (newFavorites.has(beadId)) {
+        newFavorites.delete(beadId);
+      } else {
+        newFavorites.add(beadId);
+      }
+      return newFavorites;
+    });
+  };
 
   // Save state for undo functionality
   const saveState = useCallback(() => {
@@ -622,63 +746,186 @@ export default function BeadsDesigner({ braceletSlug, beadSize, braceletLength }
                   )}
                 </CardHeader>
                 <CardContent>
-                  <div className="space-y-2">
-                    {beads.map((bead) => (
-                      <div
-                        key={bead.id}
-                        className={`group relative p-3 border-2 rounded-lg cursor-grab active:cursor-grabbing transition-all duration-200 ${
-                          selectedBead === bead.id
-                            ? 'border-blue-500 bg-blue-50 scale-105 shadow-md'
-                            : draggedBead?.id === bead.id 
-                              ? 'border-blue-400 bg-blue-25 scale-95' 
-                              : 'border-gray-200 hover:border-blue-300 hover:shadow-sm'
+                  {/* Search and Filter Controls */}
+                  <div className="space-y-3 mb-4">
+                    {/* Search Bar */}
+                    <div className="relative">
+                      <input
+                        type="text"
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        placeholder="Zoek kralen..."
+                        className="w-full px-3 py-2 pl-9 text-sm border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                      />
+                      <svg className="absolute left-3 top-2.5 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                      </svg>
+                      {searchQuery && (
+                        <button
+                          onClick={() => setSearchQuery('')}
+                          className="absolute right-3 top-2.5 text-gray-400 hover:text-gray-600"
+                        >
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </button>
+                      )}
+                    </div>
+                    
+                    {/* View Mode Toggle */}
+                    <div className="flex items-center justify-between">
+                      <div className="flex gap-1 bg-gray-100 rounded-lg p-1">
+                        <button
+                          onClick={() => setViewMode('list')}
+                          className={`px-3 py-1 text-xs rounded transition-colors ${
+                            viewMode === 'list' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-600'
+                          }`}
+                        >
+                          Lijst
+                        </button>
+                        <button
+                          onClick={() => setViewMode('grid')}
+                          className={`px-3 py-1 text-xs rounded transition-colors ${
+                            viewMode === 'grid' ? 'bg-white shadow-sm text-gray-900' : 'text-gray-600'
+                          }`}
+                        >
+                          Grid
+                        </button>
+                      </div>
+                      <span className="text-xs text-gray-500">{filteredBeads.length} kralen</span>
+                    </div>
+                    
+                    {/* Color Category Filters */}
+                    <div className="flex flex-wrap gap-1">
+                      <button
+                        onClick={() => setSelectedColorCategory(null)}
+                        className={`px-2 py-1 text-xs rounded-full transition-colors ${
+                          !selectedColorCategory 
+                            ? 'bg-primary text-white' 
+                            : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                         }`}
-                        onClick={() => {
-                          console.log('🎯 Bead clicked:', bead.name, 'Current selected:', selectedBead);
-                          setSelectedBead(selectedBead === bead.id ? null : bead.id);
-                        }}
                       >
-                        <div className="flex items-center space-x-3">
-                          {/* Color Preview */}
-                          <div className="relative flex-shrink-0">
-                            <div 
-                              className="w-8 h-8 rounded-full border-2 border-gray-300 shadow-sm overflow-hidden"
-                              style={{
-                                backgroundColor: bead.colorHex || (bead.color === 'RED' ? '#DC2626' : 
-                                                                 bead.color === 'BLUE' ? '#2563EB' : 
-                                                                 bead.color === 'GREEN' ? '#059669' : 
-                                                                 bead.color === 'YELLOW' ? '#FBBF24' : 
-                                                                 bead.color === 'PINK' ? '#EC4899' : 
-                                                                 bead.color === 'PURPLE' ? '#7C3AED' : 
-                                                                 bead.color === 'ORANGE' ? '#EA580C' : 
-                                                                 bead.color === 'TEAL' ? '#0D9488' : 
-                                                                 bead.color === 'EMERALD' ? '#10B981' : 
-                                                                 bead.color === 'SAGE' ? '#84CC16' : 
-                                                                 bead.color === 'TURQUOISE' ? '#06B6D4' : 
-                                                                 bead.color === 'GOLD' ? '#D97706' : 
-                                                                 bead.color === 'PALE_GREEN' ? '#86EFAC' : '#6B7280'),
-                                backgroundImage: 'none !important'
-                              }}
-                            />
-                            {/* No image display - only solid colors */}
+                        Alle
+                      </button>
+                      {colorCategories.map(category => (
+                        <button
+                          key={category.id}
+                          onClick={() => setSelectedColorCategory(
+                            selectedColorCategory === category.id ? null : category.id
+                          )}
+                          className={`px-2 py-1 text-xs rounded-full transition-colors flex items-center gap-1 ${
+                            selectedColorCategory === category.id
+                              ? 'bg-primary text-white' 
+                              : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                          }`}
+                        >
+                          <span>{category.icon}</span>
+                          <span>{beadsByCategory[category.id]?.length || 0}</span>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                  
+                  {/* Beads List/Grid */}
+                  <div className={`${
+                    viewMode === 'grid' 
+                      ? 'grid grid-cols-2 gap-2' 
+                      : 'space-y-2'
+                  } max-h-[600px] overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100`}>
+                    {sortedFilteredBeads.length === 0 ? (
+                      <div className="text-center py-8 text-gray-400 text-sm">
+                        Geen kralen gevonden
+                      </div>
+                    ) : (
+                      sortedFilteredBeads.map((bead) => (
+                        <div
+                          key={bead.id}
+                          className={`group relative border-2 rounded-lg cursor-grab active:cursor-grabbing transition-all duration-200 ${
+                            viewMode === 'grid' ? 'p-2' : 'p-3'
+                          } ${
+                            selectedBead === bead.id
+                              ? 'border-blue-500 bg-blue-50 scale-105 shadow-md'
+                              : draggedBead?.id === bead.id 
+                                ? 'border-blue-400 bg-blue-25 scale-95' 
+                                : 'border-gray-200 hover:border-blue-300 hover:shadow-sm'
+                          }`}
+                          onClick={() => {
+                            console.log('🎯 Bead clicked:', bead.name, 'Current selected:', selectedBead);
+                            setSelectedBead(selectedBead === bead.id ? null : bead.id);
+                          }}
+                        >
+                          {/* Favorite Star */}
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              toggleFavorite(bead.id);
+                            }}
+                            className="absolute top-1 right-1 z-10 w-5 h-5 flex items-center justify-center rounded-full bg-white/80 backdrop-blur-sm hover:bg-white transition-colors"
+                          >
+                            {favorites.has(bead.id) ? (
+                              <span className="text-yellow-400">⭐</span>
+                            ) : (
+                              <span className="text-gray-300 group-hover:text-gray-400">☆</span>
+                            )}
+                          </button>
+                          
+                          <div className={`flex ${viewMode === 'grid' ? 'flex-col' : 'flex-row'} items-center ${viewMode === 'grid' ? 'space-y-2' : 'space-x-3'}`}>
+                            {/* Color Preview */}
+                            <div className="relative flex-shrink-0">
+                              <div 
+                                className={`rounded-full border-2 border-gray-300 shadow-sm ${
+                                  viewMode === 'grid' ? 'w-12 h-12' : 'w-8 h-8'
+                                }`}
+                                style={{
+                                  backgroundColor: bead.colorHex || (bead.color === 'RED' ? '#DC2626' : 
+                                                                   bead.color === 'BLUE' ? '#2563EB' : 
+                                                                   bead.color === 'GREEN' ? '#059669' : 
+                                                                   bead.color === 'YELLOW' ? '#FBBF24' : 
+                                                                   bead.color === 'PINK' ? '#EC4899' : 
+                                                                   bead.color === 'PURPLE' ? '#7C3AED' : 
+                                                                   bead.color === 'ORANGE' ? '#EA580C' : 
+                                                                   bead.color === 'TEAL' ? '#0D9488' : 
+                                                                   bead.color === 'EMERALD' ? '#10B981' : 
+                                                                   bead.color === 'SAGE' ? '#84CC16' : 
+                                                                   bead.color === 'TURQUOISE' ? '#06B6D4' : 
+                                                                   bead.color === 'GOLD' ? '#D97706' : 
+                                                                   bead.color === 'PALE_GREEN' ? '#86EFAC' : '#6B7280')
+                                }}
+                              />
+                            </div>
+                            
+                            <div className={`flex-1 min-w-0 ${viewMode === 'grid' ? 'text-center' : ''}`}>
+                              <div className={`font-medium ${viewMode === 'grid' ? 'text-xs' : 'text-sm'} truncate`}>
+                                {bead.name}
+                              </div>
+                              <div className={`text-xs text-gray-500 ${viewMode === 'grid' ? 'text-[10px]' : ''}`}>
+                                €{(bead.priceCents / 100).toFixed(2)}
+                              </div>
+                            </div>
+                            
+                            {/* Selection Indicator */}
+                            {selectedBead === bead.id && viewMode === 'list' && (
+                              <div className="flex-shrink-0 w-5 h-5 bg-blue-500 text-white rounded-full flex items-center justify-center">
+                                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                </svg>
+                              </div>
+                            )}
                           </div>
                           
-                          <div className="flex-1 min-w-0">
-                            <div className="font-medium text-sm truncate">{bead.name}</div>
-                            <div className="text-xs text-gray-500">€{(bead.priceCents / 100).toFixed(2)}</div>
-                          </div>
-                          
-                          {/* Selection Indicator */}
-                          {selectedBead === bead.id && (
-                            <div className="flex-shrink-0 w-5 h-5 bg-blue-500 text-white rounded-full flex items-center justify-center">
-                              <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                              </svg>
+                          {/* Grid view selection indicator */}
+                          {selectedBead === bead.id && viewMode === 'grid' && (
+                            <div className="absolute inset-0 border-2 border-blue-500 rounded-lg pointer-events-none">
+                              <div className="absolute top-1 left-1 w-4 h-4 bg-blue-500 text-white rounded-full flex items-center justify-center">
+                                <svg className="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 20 20">
+                                  <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                </svg>
+                              </div>
                             </div>
                           )}
                         </div>
-                      </div>
-                    ))}
+                      ))
+                    )}
                   </div>
                 </CardContent>
               </Card>
