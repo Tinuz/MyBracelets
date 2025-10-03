@@ -563,148 +563,150 @@ export default function DesignerPage() {
             </div>
 
             {/* Sidebar - Preview & Summary */}
-            <div className="space-y-6">
+            <div className="lg:col-span-1 space-y-6">
               
-              {/* Live Preview */}
-              <Card className="sticky top-6">
-                <CardHeader>
-                  <h3 className="text-lg font-semibold">Live Preview</h3>
-                </CardHeader>
-                <CardContent>
-                  <div className="bg-gray-50 rounded-lg p-4 mb-4">
-                    <div className="text-sm font-medium text-gray-700 mb-3 text-center">
-                      {config.braceletType === 'CHAIN' 
-                        ? `${chainOptions.find(c => c.value === config.chainType)?.label || 'Chain'} Bracelet`
-                        : `${config.beadSize || 4}mm Beads Bracelet`
-                      }
+              {/* Live Preview - Sticky Container */}
+              <div className="sticky top-24 space-y-6">
+                <Card>
+                  <CardHeader>
+                    <h3 className="text-lg font-semibold">Live Preview</h3>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                      <div className="text-sm font-medium text-gray-700 mb-3 text-center">
+                        {config.braceletType === 'CHAIN' 
+                          ? `${chainOptions.find(c => c.value === config.chainType)?.label || 'Chain'} Bracelet`
+                          : `${config.beadSize || 4}mm Beads Bracelet`
+                        }
+                      </div>
+                      
+                      {/* 3D-like Preview */}
+                      <div className="bg-white rounded-lg p-4 shadow-inner min-h-[120px] flex items-center justify-center">
+                        {config.braceletType === 'CHAIN' && config.chainType ? (
+                          <div className="relative">
+                            <Image
+                              src={getChainImagePath(config.chainType)}
+                              alt={`${config.chainType} chain pattern`}
+                              width={200}
+                              height={80}
+                              className="w-full h-auto opacity-80"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-20" />
+                          </div>
+                        ) : config.braceletType === 'BEADS' ? (
+                          <div className="flex items-center justify-center space-x-1">
+                            {/* Animated beads preview */}
+                            {['red', 'blue', 'yellow', 'green', 'purple', 'pink'].map((color, index) => (
+                              <div
+                                key={color}
+                                className={`rounded-full shadow-sm transition-all duration-300 hover:scale-110 ${
+                                  color === 'red' ? 'bg-red-400' : 
+                                  color === 'blue' ? 'bg-blue-400' : 
+                                  color === 'yellow' ? 'bg-yellow-400' : 
+                                  color === 'green' ? 'bg-green-400' : 
+                                  color === 'purple' ? 'bg-purple-400' : 'bg-pink-400'
+                                }`}
+                                style={{ 
+                                  width: `${Math.max((config.beadSize || 4) * 3, 16)}px`, 
+                                  height: `${Math.max((config.beadSize || 4) * 3, 16)}px`,
+                                  animationDelay: `${index * 100}ms`
+                                }}
+                              />
+                            ))}
+                          </div>
+                        ) : (
+                          <div className="text-gray-400 text-sm">
+                            Select a bracelet type to see preview
+                          </div>
+                        )}
+                      </div>
                     </div>
                     
-                    {/* 3D-like Preview */}
-                    <div className="bg-white rounded-lg p-4 shadow-inner min-h-[120px] flex items-center justify-center">
-                      {config.braceletType === 'CHAIN' && config.chainType ? (
-                        <div className="relative">
-                          <Image
-                            src={getChainImagePath(config.chainType)}
-                            alt={`${config.chainType} chain pattern`}
-                            width={200}
-                            height={80}
-                            className="w-full h-auto opacity-80"
-                          />
-                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-20" />
+                    {/* Configuration Summary */}
+                    <div className="text-sm space-y-2">
+                      <div className="flex justify-between">
+                        <span className="text-gray-600">Type:</span>
+                        <span className="font-medium">
+                          {config.braceletType === 'CHAIN' ? 'Chain Bracelet' : 'Beads Bracelet'}
+                        </span>
+                      </div>
+
+                      {config.braceletType === 'CHAIN' && (
+                        <>
+                          {config.metalType && (
+                            <div className="flex justify-between">
+                              <span className="text-gray-600">Metal:</span>
+                              <span className="font-medium">
+                                {metalOptions.find(m => m.value === config.metalType)?.label}
+                              </span>
+                            </div>
+                          )}
+                          {config.chainType && (
+                            <div className="flex justify-between">
+                              <span className="text-gray-600">Chain:</span>
+                              <span className="font-medium">
+                                {chainOptions.find(c => c.value === config.chainType)?.label}
+                              </span>
+                            </div>
+                          )}
+                          {config.thickness && (
+                            <div className="flex justify-between">
+                              <span className="text-gray-600">Thickness:</span>
+                              <span className="font-medium">{config.thickness}mm</span>
+                            </div>
+                          )}
+                        </>
+                      )}
+                      
+                      {config.braceletType === 'BEADS' && config.beadSize && (
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Bead Size:</span>
+                          <span className="font-medium">{config.beadSize}mm</span>
                         </div>
-                      ) : config.braceletType === 'BEADS' ? (
-                        <div className="flex items-center justify-center space-x-1">
-                          {/* Animated beads preview */}
-                          {['red', 'blue', 'yellow', 'green', 'purple', 'pink'].map((color, index) => (
-                            <div
-                              key={color}
-                              className={`rounded-full shadow-sm transition-all duration-300 hover:scale-110 ${
-                                color === 'red' ? 'bg-red-400' : 
-                                color === 'blue' ? 'bg-blue-400' : 
-                                color === 'yellow' ? 'bg-yellow-400' : 
-                                color === 'green' ? 'bg-green-400' : 
-                                color === 'purple' ? 'bg-purple-400' : 'bg-pink-400'
-                              }`}
-                              style={{ 
-                                width: `${Math.max((config.beadSize || 4) * 3, 16)}px`, 
-                                height: `${Math.max((config.beadSize || 4) * 3, 16)}px`,
-                                animationDelay: `${index * 100}ms`
-                              }}
-                            />
-                          ))}
-                        </div>
-                      ) : (
-                        <div className="text-gray-400 text-sm">
-                          Select a bracelet type to see preview
+                      )}
+                      
+                      {config.length && (
+                        <div className="flex justify-between">
+                          <span className="text-gray-600">Length:</span>
+                          <span className="font-medium">{config.length}mm</span>
                         </div>
                       )}
                     </div>
-                  </div>
-                  
-                  {/* Configuration Summary */}
-                  <div className="text-sm space-y-2">
-                    <div className="flex justify-between">
-                      <span className="text-gray-600">Type:</span>
-                      <span className="font-medium">
-                        {config.braceletType === 'CHAIN' ? 'Chain Bracelet' : 'Beads Bracelet'}
-                      </span>
-                    </div>
+                  </CardContent>
+                </Card>
 
-                    {config.braceletType === 'CHAIN' && (
-                      <>
-                        {config.metalType && (
-                          <div className="flex justify-between">
-                            <span className="text-gray-600">Metal:</span>
-                            <span className="font-medium">
-                              {metalOptions.find(m => m.value === config.metalType)?.label}
-                            </span>
-                          </div>
-                        )}
-                        {config.chainType && (
-                          <div className="flex justify-between">
-                            <span className="text-gray-600">Chain:</span>
-                            <span className="font-medium">
-                              {chainOptions.find(c => c.value === config.chainType)?.label}
-                            </span>
-                          </div>
-                        )}
-                        {config.thickness && (
-                          <div className="flex justify-between">
-                            <span className="text-gray-600">Thickness:</span>
-                            <span className="font-medium">{config.thickness}mm</span>
-                          </div>
-                        )}
-                      </>
-                    )}
-                    
-                    {config.braceletType === 'BEADS' && config.beadSize && (
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Bead Size:</span>
-                        <span className="font-medium">{config.beadSize}mm</span>
+                {/* Price Estimate */}
+                <Card>
+                  <CardHeader>
+                    <h3 className="text-lg font-semibold">{t('priceEstimate')}</h3>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="text-center">
+                      <div className="text-3xl font-bold text-primary-600 mb-2">
+                        €{calculatePrice().toFixed(2)}
                       </div>
-                    )}
-                    
-                    {config.length && (
-                      <div className="flex justify-between">
-                        <span className="text-gray-600">Length:</span>
-                        <span className="font-medium">{config.length}mm</span>
+                      <div className="text-sm text-gray-500 mb-4">
+                        {config.braceletType === 'BEADS' 
+                          ? t('baseBraceletPriceBeads')
+                          : t('baseBraceletPrice')
+                        }
                       </div>
-                    )}
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Price Estimate */}
-              <Card>
-                <CardHeader>
-                  <h3 className="text-lg font-semibold">{t('priceEstimate')}</h3>
-                </CardHeader>
-                <CardContent>
-                  <div className="text-center">
-                    <div className="text-3xl font-bold text-primary-600 mb-2">
-                      €{calculatePrice().toFixed(2)}
+                      
+                      {/* Progress indicator */}
+                      <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
+                        <div 
+                          className="bg-primary-500 h-2 rounded-full transition-all duration-300"
+                          style={{ width: `${((wizardSteps.findIndex(s => s.id === currentStepId) + 1) / wizardSteps.length) * 100}%` }}
+                        />
+                      </div>
+                      
+                      <div className="text-xs text-gray-500">
+                        Configuration {Math.round(((wizardSteps.findIndex(s => s.id === currentStepId) + 1) / wizardSteps.length) * 100)}% complete
+                      </div>
                     </div>
-                    <div className="text-sm text-gray-500 mb-4">
-                      {config.braceletType === 'BEADS' 
-                        ? t('baseBraceletPriceBeads')
-                        : t('baseBraceletPrice')
-                      }
-                    </div>
-                    
-                    {/* Progress indicator */}
-                    <div className="w-full bg-gray-200 rounded-full h-2 mb-4">
-                      <div 
-                        className="bg-primary-500 h-2 rounded-full transition-all duration-300"
-                        style={{ width: `${((wizardSteps.findIndex(s => s.id === currentStepId) + 1) / wizardSteps.length) * 100}%` }}
-                      />
-                    </div>
-                    
-                    <div className="text-xs text-gray-500">
-                      Configuration {Math.round(((wizardSteps.findIndex(s => s.id === currentStepId) + 1) / wizardSteps.length) * 100)}% complete
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                  </CardContent>
+                </Card>
+              </div>
 
             </div>
 

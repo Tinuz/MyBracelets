@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Button, Card, CardContent, CardHeader, Section, Stepper, Badge } from '@/components/ui';
+import { PaletteIcon, HeartIcon, TruckIcon, ShieldCheckIcon } from '@/components/ui/Icons';
 import { useTranslations, useLocale } from 'next-intl';
 import type { Step } from '@/components/ui';
 
@@ -32,52 +33,60 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen overflow-x-hidden">
-      {/* Hero Section */}
+      {/* Hero Section - Redesigned */}
       <Section 
         variant="gradient" 
-        className="relative bg-gradient-warm min-h-[90vh] flex items-center"
+        className="relative bg-gradient-to-br from-[#FF9B82] via-[#FF8B75] to-[#FFA589] min-h-[85vh] flex items-center overflow-hidden"
       >
-        {/* Background Pattern */}
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute inset-0 bg-gradient-mesh animate-mesh-slow" />
+        {/* Subtle animated background pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.8),transparent_50%)] animate-pulse" />
         </div>
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 relative z-10 w-full">
+          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             
-            {/* Hero Content */}
-            <div className="text-center lg:text-left">
-              <Badge variant="outline" size="lg" className="mb-6 bg-white/20 text-white border-white/30">
-                ✨ {t('homepage.hero.badge')}
-              </Badge>
+            {/* Hero Content - Left Side */}
+            <div className="text-left space-y-8">
               
-              <h1 className="font-display text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+              {/* Badge */}
+              <div className="inline-block">
+                <div className="px-6 py-2 bg-white/25 backdrop-blur-sm rounded-full border border-white/40 text-white text-sm font-medium shadow-lg">
+                  ✨ {t('homepage.hero.badge')}
+                </div>
+              </div>
+              
+              {/* Main Heading */}
+              <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-[1.1] tracking-tight">
                 {t('homepage.hero.title')}
-                <span className="block text-accent-300">
+                <br />
+                <span className="text-white/95">
                   {t('homepage.hero.subtitle')}
                 </span>
               </h1>
               
-              <p className="text-xl md:text-2xl text-white/90 mb-8 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+              {/* Description */}
+              <p className="text-lg md:text-xl text-white/90 leading-relaxed max-w-xl font-light">
                 {t('homepage.hero.description')}
               </p>
               
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
+              {/* CTA Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
                 <Button 
                   size="xl" 
-                  variant="secondary"
-                  className="shadow-brand hover:shadow-medium bg-white text-primary-600 hover:bg-neutral-50"
+                  className="shadow-xl hover:shadow-2xl bg-white text-orange-600 hover:bg-orange-50 font-semibold transition-all duration-300 hover:scale-105"
                   asChild
                 >
                   <Link href={`/${locale}/designer`}>
-                    🎨 {t('homepage.hero.ctaStart')}
+                    <PaletteIcon className="w-5 h-5 mr-2" />
+                    {t('homepage.hero.ctaStart')}
                   </Link>
                 </Button>
                 
                 <Button 
                   size="xl" 
                   variant="outline"
-                  className="border-white/30 text-white hover:bg-white/10"
+                  className="border-2 border-white/40 bg-white/10 backdrop-blur-sm text-white hover:bg-white/20 font-semibold transition-all duration-300"
                   asChild
                 >
                   <Link href={`/${locale}/bracelets`}>
@@ -87,38 +96,41 @@ export default function HomePage() {
               </div>
 
               {/* Trust Indicators */}
-              <div className="flex items-center justify-center lg:justify-start space-x-6 text-white/80">
-                <div className="flex items-center space-x-2">
-                  <svg className="w-5 h-5 text-accent-300" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 18l-8-4.5V7l8-4.5L18 7v6.5L10 18z" clipRule="evenodd" />
-                  </svg>
+              <div className="flex items-center gap-8 pt-4">
+                <div className="flex items-center gap-2 text-white/90">
+                  <ShieldCheckIcon className="w-5 h-5" />
                   <span className="text-sm font-medium">{t('homepage.hero.trustIndicator1')}</span>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <svg className="w-5 h-5 text-accent-300" fill="currentColor" viewBox="0 0 20 20">
-                    <path fillRule="evenodd" d="M10 2L2 7l8 5 8-5-8-5zM2 17l8-5 8 5-8 5-8-5z" clipRule="evenodd" />
-                  </svg>
+                <div className="flex items-center gap-2 text-white/90">
+                  <TruckIcon className="w-5 h-5" />
                   <span className="text-sm font-medium">{t('homepage.hero.trustIndicator2')}</span>
                 </div>
               </div>
             </div>
 
-            {/* Hero Image/Visual */}
-            <div className="relative">
-              <div className="relative w-full h-96 lg:h-[500px] rounded-3xl overflow-hidden shadow-brand bg-gradient-secondary">
-                {/* Fallback content always visible */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center text-white">
-                    <div className="text-6xl mb-4">💎</div>
-                    <p className="text-lg font-medium">Premium Bracelets</p>
-                  </div>
+            {/* Hero Visual - Right Side */}
+            <div className="relative lg:ml-8">
+              {/* White card with shadow */}
+              <div className="relative bg-white rounded-3xl shadow-2xl p-8 md:p-12 transform lg:scale-105 hover:scale-110 transition-transform duration-500">
+                {/* Logo */}
+                <div className="relative w-full aspect-square max-w-md mx-auto">
+                  <Image
+                    src="/images/logo.png"
+                    alt="La Nina Bracelets"
+                    fill
+                    priority
+                    quality={100}
+                    sizes="(max-width: 768px) 90vw, 450px"
+                    className="object-contain drop-shadow-xl"
+                  />
                 </div>
               </div>
-
-              {/* Floating Elements */}
-              <div className="absolute -top-4 -right-4 w-24 h-24 bg-accent-400 rounded-full blur-xl opacity-60 animate-pulse-slow" />
-              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-secondary-400 rounded-full blur-2xl opacity-40 animate-bounce-slow" />
+              
+              {/* Decorative floating elements */}
+              <div className="absolute -top-6 -right-6 w-24 h-24 bg-yellow-400/30 rounded-full blur-2xl animate-pulse" />
+              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-pink-400/30 rounded-full blur-2xl animate-pulse delay-1000" />
             </div>
+
           </div>
         </div>
       </Section>
@@ -227,7 +239,7 @@ export default function HomePage() {
           <Card className="text-center border-0 shadow-soft hover:shadow-medium transition-all duration-300 group">
             <CardContent className="p-8">
               <div className="w-16 h-16 bg-gradient-brand rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <span className="text-3xl">🎨</span>
+                <PaletteIcon size={32} className="text-white" />
               </div>
               <h3 className="font-display font-semibold text-lg mb-3 text-neutral-900">{t('homepage.usps.usp1.title')}</h3>
               <p className="text-neutral-600 leading-relaxed">
@@ -239,7 +251,7 @@ export default function HomePage() {
           <Card className="text-center border-0 shadow-soft hover:shadow-medium transition-all duration-300 group">
             <CardContent className="p-8">
               <div className="w-16 h-16 bg-gradient-secondary rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <span className="text-3xl">�</span>
+                <HeartIcon size={32} className="text-white" />
               </div>
               <h3 className="font-display font-semibold text-lg mb-3 text-neutral-900">{t('homepage.usps.usp2.title')}</h3>
               <p className="text-neutral-600 leading-relaxed">
@@ -251,7 +263,7 @@ export default function HomePage() {
           <Card className="text-center border-0 shadow-soft hover:shadow-medium transition-all duration-300 group">
             <CardContent className="p-8">
               <div className="w-16 h-16 bg-gradient-accent rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <span className="text-3xl">🚚</span>
+                <TruckIcon size={32} className="text-white" />
               </div>
               <h3 className="font-display font-semibold text-lg mb-3 text-neutral-900">{t('homepage.usps.usp3.title')}</h3>
               <p className="text-neutral-600 leading-relaxed">
@@ -263,7 +275,7 @@ export default function HomePage() {
           <Card className="text-center border-0 shadow-soft hover:shadow-medium transition-all duration-300 group">
             <CardContent className="p-8">
               <div className="w-16 h-16 bg-gradient-warm rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300">
-                <span className="text-3xl">💰</span>
+                <ShieldCheckIcon size={32} className="text-white" />
               </div>
               <h3 className="font-display font-semibold text-lg mb-3 text-neutral-900">{t('homepage.usps.usp4.title')}</h3>
               <p className="text-neutral-600 leading-relaxed">

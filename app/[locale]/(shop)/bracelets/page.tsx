@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useMemo, useCallback } from 'react';
 import Link from 'next/link'
+import Image from 'next/image'
 import { Card, CardContent, CardHeader } from '@/components/ui/Common'
 import { PrimaryButton, SecondaryButton } from '@/components/ui/Button'
 import { useTranslations, useLocale } from 'next-intl'
@@ -168,14 +169,13 @@ export default function BraceletsPage() {
             <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3l14 9-14 9V3z" />
             </svg>
-            {bracelets.length} Unique Designs Available
+            {bracelets.length} {t('badge')}
           </div>
           <h1 className="text-5xl font-bold text-gray-900 mb-6 bg-gradient-to-r from-gray-900 via-blue-900 to-purple-900 bg-clip-text text-transparent">
-            Premium Bracelet Collection
+            {t('title')}
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Discover handcrafted excellence in every piece. From elegant chains to vibrant bead patterns, 
-            each bracelet tells a story. Customize to perfection or choose from our curated designs.
+            {t('description')}
           </p>
         </div>
 
@@ -192,7 +192,7 @@ export default function BraceletsPage() {
               <input
                 type="text"
                 className="block w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                placeholder="Search by name, type, material, color..."
+                placeholder={t('searchPlaceholder')}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -221,9 +221,9 @@ export default function BraceletsPage() {
                     onChange={(e) => setFilters({...filters, type: e.target.value})}
                     className="appearance-none bg-gray-50 border border-gray-200 rounded-full px-4 py-2 pr-8 text-sm font-medium text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all cursor-pointer"
                   >
-                    <option value="ALL">All Types</option>
-                    <option value="CHAIN">Chain Bracelets</option>
-                    <option value="BEADS">Bead Bracelets</option>
+                    <option value="ALL">{t('filters.allTypes')}</option>
+                    <option value="CHAIN">{t('filters.chainBracelets')}</option>
+                    <option value="BEADS">{t('filters.beadBracelets')}</option>
                   </select>
                   <svg className="absolute right-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -237,11 +237,11 @@ export default function BraceletsPage() {
                     onChange={(e) => setFilters({...filters, priceRange: e.target.value})}
                     className="appearance-none bg-gray-50 border border-gray-200 rounded-full px-4 py-2 pr-8 text-sm font-medium text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all cursor-pointer"
                   >
-                    <option value="ALL">All Prices</option>
-                    <option value="0-50">Under €50</option>
-                    <option value="50-100">€50 - €100</option>
-                    <option value="100-200">€100 - €200</option>
-                    <option value="200">€200+</option>
+                    <option value="ALL">{t('filters.allPrices')}</option>
+                    <option value="0-50">{t('filters.under50')}</option>
+                    <option value="50-100">{t('filters.50to100')}</option>
+                    <option value="100-200">{t('filters.100to200')}</option>
+                    <option value="200">{t('filters.over200')}</option>
                   </select>
                   <svg className="absolute right-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -255,9 +255,9 @@ export default function BraceletsPage() {
                     onChange={(e) => setFilters({...filters, availability: e.target.value})}
                     className="appearance-none bg-gray-50 border border-gray-200 rounded-full px-4 py-2 pr-8 text-sm font-medium text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all cursor-pointer"
                   >
-                    <option value="ALL">All Items</option>
-                    <option value="IN_STOCK">In Stock</option>
-                    <option value="OUT_OF_STOCK">Out of Stock</option>
+                    <option value="ALL">{t('filters.allItems')}</option>
+                    <option value="IN_STOCK">{t('filters.inStock')}</option>
+                    <option value="OUT_OF_STOCK">{t('filters.outOfStock')}</option>
                   </select>
                   <svg className="absolute right-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -270,7 +270,7 @@ export default function BraceletsPage() {
                     onClick={clearAllFilters}
                     className="text-sm text-gray-500 hover:text-gray-700 underline"
                   >
-                    Clear all filters
+                    {t('filters.clearAll')}
                   </button>
                 )}
               </div>
@@ -284,11 +284,11 @@ export default function BraceletsPage() {
                     onChange={(e) => setFilters({...filters, sortBy: e.target.value})}
                     className="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-2 pr-8 text-sm font-medium text-gray-700 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all cursor-pointer"
                   >
-                    <option value="FEATURED">Featured First</option>
-                    <option value="PRICE_LOW">Price: Low to High</option>
-                    <option value="PRICE_HIGH">Price: High to Low</option>
-                    <option value="NAME">Name A-Z</option>
-                    <option value="NEWEST">Newest First</option>
+                    <option value="FEATURED">{t('sort.featured')}</option>
+                    <option value="PRICE_LOW">{t('sort.priceLow')}</option>
+                    <option value="PRICE_HIGH">{t('sort.priceHigh')}</option>
+                    <option value="NAME">{t('sort.nameAZ')}</option>
+                    <option value="NEWEST">{t('sort.newest')}</option>
                   </select>
                   <svg className="absolute right-2 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-500 pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -320,16 +320,16 @@ export default function BraceletsPage() {
             {/* Results Summary */}
             <div className="flex items-center justify-between mt-4 pt-4 border-t border-gray-100">
               <div className="text-sm text-gray-600">
-                Showing <span className="font-semibold text-gray-900">{filteredBracelets.length}</span> of <span className="font-semibold text-gray-900">{bracelets.length}</span> bracelets
+                {t('results.showing')} <span className="font-semibold text-gray-900">{filteredBracelets.length}</span> {t('results.of')} <span className="font-semibold text-gray-900">{bracelets.length}</span> {t('results.bracelets')}
                 {searchQuery && (
                   <span className="ml-2">
-                    for "<span className="font-medium text-blue-600">{searchQuery}</span>"
+                    {t('results.for')} "<span className="font-medium text-blue-600">{searchQuery}</span>"
                   </span>
                 )}
               </div>
               {filteredBracelets.length > 0 && (
                 <div className="text-sm text-gray-500">
-                  Average price: <span className="font-semibold">€{(filteredBracelets.reduce((sum, b) => sum + b.basePriceCents, 0) / filteredBracelets.length / 100).toFixed(0)}</span>
+                  {t('results.averagePrice')}: <span className="font-semibold">€{(filteredBracelets.reduce((sum, b) => sum + b.basePriceCents, 0) / filteredBracelets.length / 100).toFixed(0)}</span>
                 </div>
               )}
             </div>
@@ -345,19 +345,19 @@ export default function BraceletsPage() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">No bracelets found</h3>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">{t('results.noResults')}</h3>
               <p className="text-gray-500 mb-6">
-                We couldn't find any bracelets matching your search criteria. Try adjusting your filters or search terms.
+                {t('results.noResultsDescription')}
               </p>
               <div className="space-y-3">
                 <SecondaryButton onClick={clearAllFilters} className="w-full">
-                  Clear All Filters
+                  {t('results.clearFilters')}
                 </SecondaryButton>
                 <div className="text-sm text-gray-400">
-                  or
+                  {t('filters.or')}
                 </div>
                 <PrimaryButton asChild className="w-full">
-                  <Link href={`/${locale}/designer`}>Create Custom Bracelet</Link>
+                  <Link href={`/${locale}/designer`}>{t('results.createCustom')}</Link>
                 </PrimaryButton>
               </div>
             </div>
@@ -375,17 +375,17 @@ export default function BraceletsPage() {
                   <div className="absolute top-3 left-3 z-10 space-y-2">
                     {bracelet.featured && (
                       <span className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
-                        ⭐ Featured
+                        ⭐ {t('product.featured')}
                       </span>
                     )}
                     {bracelet.stock === 0 && (
                       <span className="bg-gradient-to-r from-red-500 to-red-600 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
-                        Out of Stock
+                        {t('product.outOfStock')}
                       </span>
                     )}
                     {bracelet.stock > 0 && bracelet.stock <= 5 && (
                       <span className="bg-gradient-to-r from-orange-400 to-orange-500 text-white px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
-                        Only {bracelet.stock} Left
+                        {t('product.only')} {bracelet.stock} {t('product.left')}
                       </span>
                     )}
                   </div>
@@ -412,7 +412,7 @@ export default function BraceletsPage() {
                               ? 'bg-blue-100 text-blue-800 border border-blue-200' 
                               : 'bg-purple-100 text-purple-800 border border-purple-200'
                           }`}>
-                            {bracelet.braceletType === 'CHAIN' ? 'Chain' : 'Beads'}
+                            {bracelet.braceletType === 'CHAIN' ? t('product.chain') : t('product.beads')}
                           </span>
                           {bracelet.color && (
                             <span className="px-2 py-1 bg-gray-100 text-gray-700 rounded text-xs font-medium">
@@ -425,7 +425,7 @@ export default function BraceletsPage() {
                         <div className="text-2xl font-bold bg-gradient-to-r from-gray-900 to-gray-700 bg-clip-text text-transparent">
                           €{(bracelet.basePriceCents / 100).toFixed(2)}
                         </div>
-                        <div className="text-xs text-gray-500">Starting price</div>
+                        <div className="text-xs text-gray-500">{t('product.startingPrice')}</div>
                       </div>
                     </div>
 
@@ -440,14 +440,14 @@ export default function BraceletsPage() {
                         <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4" />
                         </svg>
-                        {bracelet.lengthMm}mm length
+                        {bracelet.lengthMm}mm {t('product.length').replace('{length}mm ', '')}
                       </div>
                       {bracelet.thickness && (
                         <div className="flex items-center">
                           <svg className="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4" />
                           </svg>
-                          {bracelet.thickness}mm thick
+                          {bracelet.thickness}mm {t('product.thickness').replace('{thickness}mm ', '')}
                         </div>
                       )}
                     </div>
@@ -456,9 +456,9 @@ export default function BraceletsPage() {
                       bracelet.stock === 0 ? 'text-red-600' : 
                       bracelet.stock <= 5 ? 'text-orange-600' : 'text-green-600'
                     }`}>
-                      {bracelet.stock === 0 ? 'Out of Stock' : 
-                       bracelet.stock <= 5 ? `Only ${bracelet.stock} remaining` : 
-                       'In Stock'}
+                      {bracelet.stock === 0 ? t('product.outOfStock') : 
+                       bracelet.stock <= 5 ? `${t('product.only')} ${bracelet.stock} ${t('product.left')}` : 
+                       t('product.inStock')}
                     </div>
                   </CardHeader>
                   
@@ -470,7 +470,7 @@ export default function BraceletsPage() {
                         asChild
                       >
                         <Link href={`/designer/${bracelet.slug}`}>
-                          {bracelet.stock === 0 ? 'Out of Stock' : 'Customize & Buy'}
+                          {bracelet.stock === 0 ? t('product.outOfStock') : t('product.customize')}
                         </Link>
                       </PrimaryButton>
                       
@@ -479,7 +479,7 @@ export default function BraceletsPage() {
                         asChild
                       >
                         <Link href={`/bracelets/${bracelet.slug}`}>
-                          View Details
+                          {t('product.viewDetails')}
                         </Link>
                       </SecondaryButton>
                     </div>
@@ -509,7 +509,7 @@ export default function BraceletsPage() {
                             <div className="flex items-center gap-2">
                               {bracelet.featured && (
                                 <span className="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs font-semibold">
-                                  ⭐ Featured
+                                  ⭐ {t('product.featured')}
                                 </span>
                               )}
                               <span className={`px-2 py-1 rounded text-xs font-semibold ${
@@ -517,7 +517,7 @@ export default function BraceletsPage() {
                                   ? 'bg-blue-100 text-blue-800' 
                                   : 'bg-purple-100 text-purple-800'
                               }`}>
-                                {bracelet.braceletType}
+                                {bracelet.braceletType === 'CHAIN' ? t('product.chain') : t('product.beads')}
                               </span>
                             </div>
                           </div>
@@ -529,18 +529,18 @@ export default function BraceletsPage() {
                           )}
                           
                           <div className="flex items-center gap-4 text-sm text-gray-500 mb-3">
-                            <span>Length: {bracelet.lengthMm}mm</span>
-                            {bracelet.thickness && <span>Thickness: {bracelet.thickness}mm</span>}
-                            {bracelet.color && <span>Color: {bracelet.color}</span>}
+                            <span>{t('product.length').replace('{length}', bracelet.lengthMm.toString())}</span>
+                            {bracelet.thickness && <span>{t('product.thickness').replace('{thickness}', bracelet.thickness.toString())}</span>}
+                            {bracelet.color && <span>{t('product.color')}: {bracelet.color}</span>}
                           </div>
                           
                           <div className={`text-sm font-semibold ${
                             bracelet.stock === 0 ? 'text-red-600' : 
                             bracelet.stock <= 5 ? 'text-orange-600' : 'text-green-600'
                           }`}>
-                            {bracelet.stock === 0 ? 'Out of Stock' : 
-                             bracelet.stock <= 5 ? `Only ${bracelet.stock} left` : 
-                             'In Stock'}
+                            {bracelet.stock === 0 ? t('product.outOfStock') : 
+                             bracelet.stock <= 5 ? `${t('product.only')} ${bracelet.stock} ${t('product.left')}` : 
+                             t('product.inStock')}
                           </div>
                         </div>
                         
@@ -555,7 +555,7 @@ export default function BraceletsPage() {
                               className="w-full min-w-[140px]"
                             >
                               <Link href={`/${locale}/designer/${bracelet.slug}`}>
-                                {bracelet.stock === 0 ? 'Out of Stock' : 'Customize'}
+                                {bracelet.stock === 0 ? t('product.outOfStock') : t('product.customizeShort')}
                               </Link>
                             </PrimaryButton>
                             <SecondaryButton 
@@ -563,7 +563,7 @@ export default function BraceletsPage() {
                               className="w-full text-sm"
                             >
                               <Link href={`/${locale}/bracelets/${bracelet.slug}`}>
-                                Details
+                                {t('product.details')}
                               </Link>
                             </SecondaryButton>
                           </div>
@@ -579,16 +579,16 @@ export default function BraceletsPage() {
 
         {/* Call to Action */}
         <div className="bg-white rounded-xl p-8 shadow-sm text-center">
-          <h2 className="text-2xl font-bold mb-4">Need Help Choosing?</h2>
+          <h2 className="text-2xl font-bold mb-4">{t('cta.title')}</h2>
           <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-            Our bracelet experts are here to help you find the perfect piece. Contact us for personalized recommendations or custom designs.
+            {t('cta.description')}
           </p>
           <div className="flex justify-center gap-4">
             <PrimaryButton asChild>
-              <Link href={`/${locale}/contact`}>Contact Us</Link>
+              <Link href={`/${locale}/contact`}>{t('cta.contactUs')}</Link>
             </PrimaryButton>
             <SecondaryButton asChild>
-              <Link href={`/${locale}/#how-it-works`}>How It Works</Link>
+              <Link href={`/${locale}/#how-it-works`}>{t('cta.howItWorks')}</Link>
             </SecondaryButton>
           </div>
         </div>
@@ -639,10 +639,12 @@ function ProductImageGallery({ images, svgPath, name }: {
     <div className="relative w-full h-full overflow-hidden">
       {/* Main Image */}
       <div className="relative w-full h-full">
-        <img 
+        <Image 
           src={validImages[currentImage]!} 
           alt={`${name} ${currentImage + 1}`}
-          className={`w-full h-full object-cover transition-all duration-500 ${
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          className={`object-cover transition-all duration-500 ${
             imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
           }`}
           onLoad={() => setImageLoaded(true)}

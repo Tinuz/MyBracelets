@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { AdminLayout } from '@/components/admin/AdminLayout';
 import { Card, CardContent, CardHeader } from '@/components/ui/Common';
 import { PrimaryButton, SecondaryButton } from '@/components/ui/Button';
@@ -192,11 +193,15 @@ export default function AdminCharmsPage() {
                     {charms.map((charm) => (
                       <tr key={charm.id} className="border-b hover:bg-gray-50">
                         <td className="py-3 px-4">
-                          <img
-                            src={charm.imageUrl}
-                            alt={charm.name}
-                            className="w-12 h-12 object-cover rounded"
-                          />
+                          <div className="relative w-12 h-12 rounded overflow-hidden">
+                            <Image
+                              src={charm.imageUrl}
+                              alt={charm.name}
+                              fill
+                              sizes="48px"
+                              className="object-cover"
+                            />
+                          </div>
                         </td>
                         <td className="py-3 px-4">
                           <span className="font-mono text-sm text-gray-600">{charm.sku}</span>

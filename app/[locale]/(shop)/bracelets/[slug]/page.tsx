@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Card, CardContent, CardHeader } from '@/components/ui/Common';
 import { PrimaryButton, SecondaryButton } from '@/components/ui/Button';
 
@@ -119,12 +120,15 @@ export default function BraceletDetailPage() {
           
           {/* Product Images */}
           <div className="space-y-4">
-            <div className="aspect-square bg-white rounded-lg overflow-hidden shadow-sm">
+            <div className="aspect-square bg-white rounded-lg overflow-hidden shadow-sm relative">
               {images.length > 0 ? (
-                <img
+                <Image
                   src={images[selectedImage]}
                   alt={`${bracelet.name} ${selectedImage + 1}`}
-                  className="w-full h-full object-cover"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover"
+                  priority={selectedImage === 0}
                 />
               ) : (
                 <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200">
@@ -152,14 +156,16 @@ export default function BraceletDetailPage() {
                   <button
                     key={index}
                     onClick={() => setSelectedImage(index)}
-                    className={`w-20 h-20 rounded-lg overflow-hidden border-2 transition-colors ${
+                    className={`relative w-20 h-20 rounded-lg overflow-hidden border-2 transition-colors ${
                       selectedImage === index ? 'border-blue-500' : 'border-gray-200 hover:border-gray-300'
                     }`}
                   >
-                    <img
+                    <Image
                       src={image}
                       alt={`${bracelet.name} thumbnail ${index + 1}`}
-                      className="w-full h-full object-cover"
+                      fill
+                      sizes="80px"
+                      className="object-cover"
                     />
                   </button>
                 ))}
@@ -346,10 +352,12 @@ function RelatedProducts({ currentBraceletId, braceletType }: {
             <Link href={`/bracelets/${bracelet.slug}`}>
               <div className="h-48 bg-gradient-to-br from-gray-100 to-gray-200 relative overflow-hidden">
                 {bracelet.imageUrl ? (
-                  <img
+                  <Image
                     src={bracelet.imageUrl}
                     alt={bracelet.name}
-                    className="w-full h-full object-cover"
+                    fill
+                    sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                    className="object-cover"
                   />
                 ) : (
                   <div className="w-full h-full flex items-center justify-center">

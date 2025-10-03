@@ -1,9 +1,31 @@
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
-import { Navbar } from '@/components/ui/Navbar'
+import { Navbar } from '@/components/ui/Navbar';
+import { Footer } from '@/components/ui/Footer';
+import type { Metadata } from 'next';
 
 const locales = ['en', 'nl'];
+
+export async function generateMetadata({ params: { locale } }: { params: { locale: string } }): Promise<Metadata> {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://laninabracelets.com';
+  
+  return {
+    metadataBase: new URL(baseUrl),
+    alternates: {
+      canonical: `/${locale}`,
+      languages: {
+        'en': '/en',
+        'nl': '/nl',
+        'x-default': '/nl',
+      },
+    },
+    openGraph: {
+      locale: locale,
+      alternateLocale: locales.filter(l => l !== locale),
+    },
+  };
+}
 
 export default async function LocaleLayout({
   children,
@@ -27,14 +49,7 @@ export default async function LocaleLayout({
         {children}
       </main>
       
-      <footer className="bg-neutral-50 border-t border-neutral-200 mt-24">
-        <div className="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
-          <div className="text-center text-neutral-500">
-            <p className="font-medium">&copy; 2024 La Nina Bracelets. All rights reserved.</p>
-            <p className="text-sm mt-2">Handcrafted jewelry made with love</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </NextIntlClientProvider>
   );
 }

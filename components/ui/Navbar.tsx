@@ -69,6 +69,7 @@ export function Navbar() {
     { href: `/${locale}/bracelets`, label: t('navigation.collection') },
     { href: `/${locale}/designer`, label: t('navigation.designer') },
     { href: `/${locale}/about`, label: t('navigation.about') },
+    { href: `/${locale}/contact`, label: t('navigation.contact') },
   ];
 
   const isActive = (href: string) => {
@@ -91,12 +92,12 @@ export function Navbar() {
         <div className="flex justify-between items-center h-20">
           
           {/* Logo / Brand */}
-          <div className="flex items-center">
+          <div className="flex items-center flex-shrink-0">
             <Link 
               href={`/${locale}`} 
-              className="flex items-center space-x-3 hover:opacity-80 transition-opacity group"
+              className="flex items-center space-x-2.5 hover:opacity-80 transition-opacity group"
             >
-              <div className="relative w-10 h-10 overflow-hidden rounded-xl">
+              <div className="relative w-10 h-10 overflow-hidden rounded-xl flex-shrink-0">
                 <Image 
                   src="/images/logo.png"
                   alt="La Nina Bracelets"
@@ -105,23 +106,23 @@ export function Navbar() {
                   className="object-cover w-full h-full group-hover:scale-110 transition-transform duration-300"
                 />
               </div>
-              <div>
-                <h1 className="text-xl font-display font-bold text-neutral-900">
+              <div className="flex-shrink-0">
+                <h1 className="text-lg font-display font-bold text-neutral-900 whitespace-nowrap">
                   La Nina Bracelets
                 </h1>
-                <p className="text-xs text-neutral-600 -mt-1">{t('common.tagline')}</p>
+                <p className="text-[10px] text-neutral-600 -mt-0.5 whitespace-nowrap">{t('common.tagline')}</p>
               </div>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
+          <nav className="hidden lg:flex items-center space-x-1 xl:space-x-2">
             {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 className={cn(
-                  "relative px-4 py-2 font-medium transition-all duration-200 group",
+                  "relative px-3 xl:px-4 py-2 font-medium text-sm xl:text-base transition-all duration-200 group whitespace-nowrap",
                   {
                     "text-primary-600": isActive(item.href),
                     "text-neutral-700 hover:text-primary-600": !isActive(item.href),
@@ -141,7 +142,7 @@ export function Navbar() {
           </nav>
 
           {/* Actions - Language, Cart & Mobile Menu */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2 xl:space-x-3 flex-shrink-0">
             
             {/* Language Switcher */}
             <LanguageSwitcher />
@@ -196,12 +197,12 @@ export function Navbar() {
             </div>
 
             {/* CTA Button */}
-            <div className="hidden md:block">
+            <div className="hidden xl:block">
               <Button 
                 asChild
                 variant="gradient"
                 size="default"
-                className="shadow-soft hover:shadow-medium"
+                className="shadow-soft hover:shadow-medium whitespace-nowrap px-4 xl:px-6"
               >
                 <Link href={`/${locale}/designer`}>
                   {t('common.designNow')}

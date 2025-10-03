@@ -18,7 +18,7 @@
     "quantity": "Aantal",
     "tagline": "Handgemaakte sieraden",
     "designNow": "Ontwerp Nu",
-    "designYourBracelet": "Ontwerp Je Bracelet"
+    "designYourBracelet": "Ontwerp Je Armband"
   },
   "navigation": {
     "home": "Home",
@@ -33,8 +33,8 @@
     "hero": {
       "badge": "Handgemaakte Sieraden",
       "title": "Ontwerp Je",
-      "subtitle": "Perfecte Bracelet",
-      "description": "Creëer een unieke bracelet met onze interactieve designer. Combineer charms, beads en kleuren voor eindeloze mogelijkheden.",
+      "subtitle": "Perfecte Armband",
+      "description": "Creëer een unieke armband met onze interactieve designer. Combineer bedels, kralen en kleuren voor eindeloze mogelijkheden.",
       "ctaStart": "Start Ontwerpen",
       "ctaCollection": "Bekijk Collectie",
       "trustIndicator1": "Premium Kwaliteit",
@@ -43,35 +43,35 @@
     "steps": {
       "step1": {
         "title": "Kies Je Basis",
-        "description": "Selecteer uit onze prachtige base bracelets in verschillende stijlen en kleuren"
+        "description": "Selecteer uit onze prachtige armbanden in verschillende stijlen en kleuren"
       },
       "step2": {
-        "title": "Voeg Charms Toe", 
-        "description": "Sleep charms naar je bracelet en plaats ze precies waar je wilt"
+        "title": "Voeg Bedels Toe", 
+        "description": "Sleep bedels naar je armband en plaats ze precies waar je wilt"
       },
       "step3": {
         "title": "Bestellen",
-        "description": "Bewaar je ontwerp en ga naar de checkout. Wij maken je unieke bracelet"
+        "description": "Bewaar je ontwerp en ga naar de checkout. Wij maken je unieke armband"
       }
     },
     "howItWorks": {
       "badge": "Zo Werkt Het",
       "title": "In 3 Simpele Stappen",
-      "description": "Van concept naar creation - ontdek hoe eenvoudig het is om je droomarm bracelet te maken"
+      "description": "Van concept naar creatie - ontdek hoe eenvoudig het is om je drooma armband te maken"
     },
     "whyDesigner": {
       "title": "Waarom Onze Designer Tool?",
       "feature1": {
         "title": "Real-time Visualisatie",
-        "description": "Zie direct hoe je bracelet eruit komt te zien tijdens het ontwerpen"
+        "description": "Zie direct hoe je armband eruit komt te zien tijdens het ontwerpen"
       },
       "feature2": {
         "title": "Slimme Prijsberekening", 
-        "description": "Automatische kortingen bij 5+ charms (5%) of 10+ charms (10%)"
+        "description": "Automatische kortingen bij 5+ bedels (5%) of 10+ bedels (10%)"
       },
       "feature3": {
         "title": "Onbeperkte Mogelijkheden",
-        "description": "Combineer chains, beads en charms voor unieke creaties"
+        "description": "Combineer kettingen, kralen en bedels voor unieke creaties"
       },
       "cta": "Probeer Nu Gratis"
     },
@@ -80,7 +80,7 @@
       "description": "Ontdek wat ons onderscheidt in de wereld van handgemaakte sieraden",
       "usp1": {
         "title": "Interactief Ontwerpen",
-        "description": "Real-time visuele designer met drag & drop charm positionering voor perfecte controle"
+        "description": "Real-time visuele designer met drag & drop bedel positionering voor perfecte controle"
       },
       "usp2": {
         "title": "Premium Kwaliteit",
@@ -92,31 +92,31 @@
       },
       "usp4": {
         "title": "Slimme Prijzen",
-        "description": "Volume kortingen: 5% korting bij 5+ charms, 10% korting bij 10+ charms"
+        "description": "Volume kortingen: 5% korting bij 5+ bedels, 10% korting bij 10+ bedels"
       }
     },
     "socialProof": {
       "customers": "Tevreden Klanten",
-      "bracelets": "Bracelets Gemaakt",
+      "bracelets": "Armbanden Gemaakt",
       "rating": "Gemiddelde Review"
     },
     "reviews": {
       "badge": "Klantreviews",
       "title": "Wat Onze Klanten Zeggen",
       "review1": {
-        "quote": "Zo blij met mijn bracelet! De designer tool was super makkelijk te gebruiken en het resultaat is nog mooier dan ik had verwacht."
+        "quote": "Zo blij met mijn armband! De designer tool was super makkelijk te gebruiken en het resultaat is nog mooier dan ik had verwacht."
       },
       "review2": {
-        "quote": "Perfecte kwaliteit en snelle levering! Ik heb al drie bracelets besteld voor vrienden en familie."
+        "quote": "Perfecte kwaliteit en snelle levering! Ik heb al drie armbanden besteld voor vrienden en familie."
       },
       "review3": {
-        "quote": "De charms zijn van geweldige kwaliteit en de bracelet zit perfect. Absolute aanrader!"
+        "quote": "De bedels zijn van geweldige kwaliteit en de armband zit perfect. Absolute aanrader!"
       }
     },
     "finalCta": {
       "title": "Klaar Om Iets",
       "subtitle": "Moois Te Creëren?",
-      "description": "Begin vandaag nog met het ontwerpen van je perfecte bracelet. Het duurt maar een paar minuten!",
+      "description": "Begin vandaag nog met het ontwerpen van je perfecte armband. Het duurt maar een paar minuten!",
       "ctaStart": "Start Je Ontwerp",
       "ctaCollection": "Bekijk Collectie",
       "trustSignal1": "Gratis Verzending vanaf €50",
@@ -129,7 +129,7 @@
     "braceletType": "Armband Type",
     "braceletTypeDescription": "Kies tussen ketting of kralenarmband",
     "chainBracelet": "Ketting Armband",
-    "chainDescription": "Traditionele ketting met charmes",
+    "chainDescription": "Traditionele ketting met bedels",
     "beadsBracelet": "Kralen Armband",
     "beadsDescription": "Kleurrijk kralenpatroon",
     "selectMetal": "Selecteer Metaal",
@@ -144,7 +144,7 @@
     "length": "Lengte",
     "configuration": {
       "title": "Ontwerp Je Armband",
-      "chainDescription": "Configureer je perfecte ketting armband voordat je charmes toevoegt",
+      "chainDescription": "Configureer je perfecte ketting armband voordat je bedels toevoegt",
       "beadsDescription": "Configureer je perfecte kralen armband en creëer patronen",
       "braceletType": "Armband Type",
       "braceletTypeDescription": "Kies tussen ketting of kralen armband",
@@ -152,21 +152,21 @@
       "beadsBracelet": "Kralen Armband"
     },
     "priceEstimate": "Prijs Schatting",
-    "baseBraceletPrice": "Basis armband prijs (voor charmes)",
-    "baseBraceletPriceBeads": "Basis armband prijs (voor kralen & charmes)",
-    "continueToAddCharms": "Doorgaan naar Charmes Toevoegen",
+    "baseBraceletPrice": "Basis armband prijs (voor bedels)",
+    "baseBraceletPriceBeads": "Basis armband prijs (voor kralen & bedels)",
+    "continueToAddCharms": "Doorgaan naar Bedels Toevoegen",
     "continueToDesignBeads": "Doorgaan naar Kralen Ontwerpen",
     "backToHome": "Terug naar Home",
-    "dragCharm": "Sleep charme naar armband",
-    "dropToPlace": "Laat los om charme te plaatsen",
-    "removeCharm": "Charme verwijderen",
-    "rotateCharm": "Charme roteren",
-    "charmRotated": "Charme geroteerd",
-    "charmPlaced": "Charme geplaatst",
-    "charmRemoved": "Charme verwijderd",
+    "dragCharm": "Sleep bedel naar armband",
+    "dropToPlace": "Laat los om bedel te plaatsen",
+    "removeCharm": "Bedel verwijderen",
+    "rotateCharm": "Bedel roteren",
+    "charmRotated": "Bedel geroteerd",
+    "charmPlaced": "Bedel geplaatst",
+    "charmRemoved": "Bedel verwijderd",
     "undoLastAction": "Laatste actie ongedaan maken",
     "redoLastAction": "Laatste actie opnieuw",
-    "clearAll": "Alle charmes wissen",
+    "clearAll": "Alle bedels wissen",
     "zoomIn": "Inzoomen",
     "zoomOut": "Uitzoomen",
     "resetView": "Weergave resetten",
@@ -178,11 +178,11 @@
     "touchInstructions": "Aanraking: Knijp om te zoomen, dubbeltik charme om te roteren",
     "designTools": "Ontwerp Tools",
     "canvasControls": "Canvas Bediening",
-    "placementGuide": "Sleep charmes van het palet naar je armband",
+    "placementGuide": "Sleep bedels van het palet naar je armband",
     "emptyCanvas": "Je canvas is leeg",
-    "startDesigning": "Begin door charmes van het palet te slepen",
-    "charmCount": "Charmes: {{count}}",
-    "maxCharmsReached": "Maximum charmes bereikt",
+    "startDesigning": "Begin door bedels van het palet te slepen",
+    "charmCount": "Bedels: {{count}}",
+    "maxCharmsReached": "Maximum bedels bereikt",
     "designComplete": "Ontwerp voltooid!",
     "readyToOrder": "Je ontwerp is klaar om te bestellen",
     "step": "Stap",
@@ -221,6 +221,8 @@
   "bracelets": {
     "title": "Premium Armband Collectie",
     "subtitle": "Ontdek handgemaakte excellentie in elk stuk",
+    "badge": "Unieke Ontwerpen Beschikbaar",
+    "description": "Ontdek handgemaakte excellentie in elk stuk. Van elegante kettingen tot levendige kralenpatronen, elke armband vertelt een verhaal. Pas aan naar perfectie of kies uit onze gecureerde ontwerpen.",
     "searchPlaceholder": "Zoeken op naam, type, materiaal, kleur...",
     "clearSearch": "Zoekopdracht wissen",
     "filters": {
@@ -235,7 +237,8 @@
       "allItems": "Alle Items",
       "inStock": "Op Voorraad",
       "outOfStock": "Niet Op Voorraad",
-      "clearAll": "Alle filters wissen"
+      "clearAll": "Alle filters wissen",
+      "or": "of"
     },
     "sort": {
       "featured": "Aanbevolen Eerst",
@@ -257,22 +260,32 @@
       "noResults": "Geen armbanden gevonden",
       "noResultsDescription": "We konden geen armbanden vinden die aan je zoekcriteria voldoen. Probeer je filters of zoektermen aan te passen.",
       "clearFilters": "Alle Filters Wissen",
-      "createCustom": "Maak Custom Armband"
+      "createCustom": "Maak Aangepaste Armband"
     },
     "product": {
       "featured": "Aanbevolen",
       "outOfStock": "Niet Op Voorraad",
+      "only": "Nog maar",
+      "left": "over",
       "lowStock": "Nog maar {count} over",
       "inStock": "Op Voorraad",
       "remaining": "Nog maar {count} over",
-      "length": "Lengte",
-      "thickness": "Dikte",
+      "length": "{length}mm lengte",
+      "thickness": "{thickness}mm dik",
       "color": "Kleur",
       "startingPrice": "Vanaf prijs",
       "customize": "Aanpassen & Kopen",
+      "customizeShort": "Aanpassen",
       "viewDetails": "Bekijk Details",
+      "details": "Details",
       "chain": "Ketting",
       "beads": "Kralen"
+    },
+    "cta": {
+      "title": "Hulp Nodig Bij Kiezen?",
+      "description": "Onze armband experts staan klaar om je te helpen het perfecte stuk te vinden. Neem contact op voor persoonlijke aanbevelingen of aangepaste ontwerpen.",
+      "contactUs": "Neem Contact Op",
+      "howItWorks": "Hoe Het Werkt"
     }
   },
   "beadsDesigner": {
@@ -342,7 +355,7 @@
     "dashboard": "Dashboard",
     "orders": "Bestellingen",
     "bracelets": "Armbanden",
-    "charms": "Charmes",
+    "charms": "Bedels",
     "beads": "Kralen",
     "chains": "Kettingen",
     "login": "Admin Login",
@@ -357,5 +370,167 @@
     "total": "Totaal",
     "date": "Datum",
     "actions": "Acties"
+  },
+  "contact": {
+    "title": "Neem Contact Op",
+    "subtitle": "Heb je vragen? We helpen je graag!",
+    "form": {
+      "name": "Je naam",
+      "email": "E-mailadres",
+      "subject": "Onderwerp",
+      "message": "Bericht",
+      "send": "Verstuur Bericht"
+    },
+    "info": {
+      "email": "support@laninabracelets.com",
+      "phone": "+31 (0)6 12345678",
+      "hours": "Ma-Vr: 9:00 - 18:00",
+      "response": "We reageren binnen 24 uur"
+    }
+  },
+  "faq": {
+    "title": "Veelgestelde Vragen",
+    "subtitle": "Vind snel antwoord op je vragen",
+    "questions": {
+      "shipping": {
+        "q": "Hoe lang duurt verzending?",
+        "a": "Standaard levering binnen Nederland is 2-3 werkdagen. Voor België en Duitsland 3-5 werkdagen."
+      },
+      "custom": {
+        "q": "Kan ik een custom ontwerp bestellen?",
+        "a": "Ja! Gebruik onze interactieve designer tool om je eigen unieke armband te ontwerpen."
+      },
+      "returns": {
+        "q": "Wat is jullie retourbeleid?",
+        "a": "Je hebt 30 dagen bedenktijd. Zie ons retourbeleid voor meer details."
+      },
+      "care": {
+        "q": "Hoe onderhoud ik mijn armband?",
+        "a": "Vermijd contact met water en parfum. Bewaar in een droge plaats. Maak schoon met een zachte doek."
+      }
+    }
+  },
+  "returns": {
+    "title": "Retourbeleid",
+    "subtitle": "30 dagen niet-goed-geld-terug garantie",
+    "policy": {
+      "intro": "We willen dat je 100% tevreden bent met je aankoop.",
+      "period": "Je hebt 30 dagen na ontvangst om je bestelling te retourneren.",
+      "condition": "Producten moeten ongedragen en in originele staat zijn.",
+      "process": "Neem contact op via support@laninabracelets.com voor een retourlabel.",
+      "refund": "Geld terug binnen 5-7 werkdagen na ontvangst retour."
+    }
+  },
+  "giftcard": {
+    "title": "Cadeaubon",
+    "subtitle": "Het perfecte cadeau voor elke gelegenheid",
+    "description": "Geef de vrijheid om zelf te ontwerpen met een La Nina Bracelets cadeaubon.",
+    "amounts": {
+      "25": "€25 Cadeaubon",
+      "50": "€50 Cadeaubon",
+      "100": "€100 Cadeaubon",
+      "custom": "Eigen bedrag"
+    }
+  },
+  "sizing": {
+    "title": "Maatadvies",
+    "subtitle": "Vind de perfecte maat voor je armband",
+    "guide": {
+      "measure": "Meet je pols met een meetlint of touwtje.",
+      "add": "Tel 1-2 cm toe voor een comfortabele pasvorm.",
+      "standard": "Standaard maten: S (16-17cm), M (17-18cm), L (18-19cm)"
+    },
+    "help": "Twijfel je? Neem contact met ons op voor persoonlijk advies!"
+  },
+  "shipping": {
+    "title": "Verzending & Levering",
+    "subtitle": "Betrouwbare verzending naar heel Europa",
+    "domestic": {
+      "title": "Nederland",
+      "description": "Standaard levering binnen 2-3 werkdagen",
+      "price": "Gratis vanaf €50, anders €4,95"
+    },
+    "belgium": {
+      "title": "België",
+      "description": "Levering binnen 3-5 werkdagen",
+      "price": "Gratis vanaf €75, anders €6,95"
+    },
+    "europe": {
+      "title": "Europa",
+      "description": "Levering binnen 5-7 werkdagen",
+      "price": "Vanaf €9,95"
+    },
+    "tracking": {
+      "title": "Track & Trace",
+      "description": "Alle bestellingen worden verzonden met track & trace code"
+    },
+    "processing": {
+      "title": "Verwerkingstijd",
+      "description": "Bestellingen worden binnen 1-2 werkdagen verwerkt"
+    }
+  },
+  "about": {
+    "title": "Over",
+    "brandName": "La Nina Bracelets",
+    "subtitle": "Unieke, gepersonaliseerde sieraden door innovatief design en premium materialen.",
+    "story": {
+      "title": "Ons Verhaal",
+      "paragraph1": "La Nina Bracelets is opgericht met een simpele visie: mooie, gepersonaliseerde sieraden toegankelijk maken voor iedereen. Ons innovatieve designplatform stelt klanten in staat om echt unieke stukken te creëren die hun persoonlijke stijl en verhaal weerspiegelen.",
+      "paragraph2": "We combineren traditioneel vakmanschap met moderne technologie en bieden een interactieve designervaring waarmee je je armband kunt visualiseren voordat deze wordt gemaakt."
+    },
+    "process": {
+      "title": "Ons Proces",
+      "design": {
+        "title": "Ontwerp",
+        "description": "Gebruik onze interactieve designer om je perfecte armband te creëren"
+      },
+      "craft": {
+        "title": "Maken",
+        "description": "Onze ervaren ambachtslieden assembleren zorgvuldig je unieke stuk"
+      },
+      "deliver": {
+        "title": "Leveren",
+        "description": "Je armband arriveert mooi verpakt en klaar om te dragen"
+      }
+    },
+    "quality": {
+      "title": "Kwaliteit & Materialen",
+      "metals": {
+        "title": "Premium Metalen",
+        "item1": "Sterling Zilver (925)",
+        "item2": "14K Goud & Roségoud",
+        "item3": "Witgoud & Platina",
+        "item4": "Chirurgisch Staal Opties"
+      },
+      "charms": {
+        "title": "Kwaliteit Bedels",
+        "item1": "Handgeselecteerde designs",
+        "item2": "Duurzame plating & afwerkingen",
+        "item3": "Hypoallergene materialen",
+        "item4": "Ethisch verantwoorde componenten"
+      }
+    },
+    "contact": {
+      "title": "Neem Contact Op",
+      "support": {
+        "title": "Klantenservice",
+        "email": "Email",
+        "responseTime": "Reactietijd",
+        "responseValue": "Binnen 24 uur",
+        "available": "Beschikbaar",
+        "availableValue": "Maandag - Vrijdag, 9:00 - 18:00 CET"
+      },
+      "custom": {
+        "title": "Custom Bestellingen",
+        "description": "Op zoek naar iets speciaals? We accepteren ook custom designverzoeken voor unieke stukken.",
+        "button": "Contact voor Custom Werk"
+      }
+    },
+    "cta": {
+      "title": "Klaar om Je Unieke Armband Te Creëren?",
+      "description": "Start vandaag met ontwerpen en breng je visie tot leven!",
+      "startDesigning": "Start Ontwerpen",
+      "browseBracelets": "Bekijk Armbanden"
+    }
   }
 }

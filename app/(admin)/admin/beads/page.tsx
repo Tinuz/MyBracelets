@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { AdminLayout } from '@/components/admin/AdminLayout';
 import { Card, CardContent, CardHeader } from '@/components/ui/Common';
 import { PrimaryButton, SecondaryButton } from '@/components/ui/Button';
@@ -224,11 +225,13 @@ export default function AdminBeadsPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                 {filteredBeads.map((bead) => (
                   <div key={bead.id} className="border rounded-lg p-4 hover:shadow-md transition-shadow">
-                    <div className="aspect-square mb-3 bg-gray-100 rounded-lg overflow-hidden">
-                      <img
+                    <div className="relative aspect-square mb-3 bg-gray-100 rounded-lg overflow-hidden">
+                      <Image
                         src={bead.imageUrl}
                         alt={bead.name}
-                        className="w-full h-full object-cover"
+                        fill
+                        sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                        className="object-cover"
                       />
                     </div>
                     

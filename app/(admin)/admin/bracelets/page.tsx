@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { AdminLayout } from '@/components/admin/AdminLayout';
 import { Card, CardContent, CardHeader } from '@/components/ui/Common';
 import { PrimaryButton, SecondaryButton } from '@/components/ui/Button';
@@ -246,12 +247,15 @@ export default function AdminBraceletsPage() {
                           <div className="flex space-x-1">
                             {[bracelet.imageUrl, bracelet.imageUrl2, bracelet.imageUrl3].map((imageUrl, index) => (
                               imageUrl ? (
-                                <img
-                                  key={index}
-                                  src={imageUrl}
-                                  alt={`${bracelet.name} ${index + 1}`}
-                                  className="w-8 h-8 object-cover rounded border"
-                                />
+                                <div key={index} className="relative w-8 h-8 rounded border overflow-hidden">
+                                  <Image
+                                    src={imageUrl}
+                                    alt={`${bracelet.name} ${index + 1}`}
+                                    fill
+                                    sizes="32px"
+                                    className="object-cover"
+                                  />
+                                </div>
                               ) : (
                                 <div key={index} className="w-8 h-8 bg-gray-100 rounded border flex items-center justify-center">
                                   <span className="text-gray-400 text-xs">{index + 1}</span>

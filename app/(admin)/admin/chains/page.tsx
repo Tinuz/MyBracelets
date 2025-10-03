@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { AdminLayout } from '@/components/admin/AdminLayout';
 import { Card, CardContent, CardHeader } from '@/components/ui/Common';
 import { PrimaryButton, SecondaryButton } from '@/components/ui/Button';
@@ -245,11 +246,15 @@ export default function AdminChainsPage() {
                       <tr key={chain.id} className="border-b hover:bg-gray-50">
                         <td className="py-3 px-4">
                           {chain.imageUrl ? (
-                            <img
-                              src={chain.imageUrl}
-                              alt={chain.name}
-                              className="w-12 h-12 object-cover rounded"
-                            />
+                            <div className="relative w-12 h-12 rounded overflow-hidden">
+                              <Image
+                                src={chain.imageUrl}
+                                alt={chain.name}
+                                fill
+                                sizes="48px"
+                                className="object-cover"
+                              />
+                            </div>
                           ) : (
                             <div className="w-12 h-12 bg-gray-200 rounded flex items-center justify-center">
                               <span className="text-xs text-gray-500">No Image</span>

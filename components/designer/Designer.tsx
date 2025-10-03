@@ -2,6 +2,7 @@
 
 import React, { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 import Button, { PrimaryButton, SecondaryButton } from "@/components/ui/Button";
 import { LoadingSpinner, Alert, Card, CardContent, CardHeader } from "@/components/ui/Common";
 import { addToCart } from "@/lib/cart";
@@ -1011,13 +1012,17 @@ export default function Designer({ braceletSlug, config }: DesignerProps) {
                       onClick={() => addCharm(charm.id)}
                       disabled={charm.stock === 0}
                     >
-                      <div className="flex items-center justify-center h-12 mb-2">
+                      <div className="flex items-center justify-center h-12 mb-2 relative">
                         {charm.imageUrl ? (
-                          <img 
-                            src={charm.imageUrl} 
-                            alt={charm.name}
-                            className="w-10 h-10 object-contain"
-                          />
+                          <div className="relative w-10 h-10">
+                            <Image 
+                              src={charm.imageUrl} 
+                              alt={charm.name}
+                              fill
+                              sizes="40px"
+                              className="object-contain"
+                            />
+                          </div>
                         ) : charm.svg ? (
                           <div dangerouslySetInnerHTML={{ __html: charm.svg }} />
                         ) : (
