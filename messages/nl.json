@@ -293,6 +293,9 @@
     "subtitle": "Sleep kralen van het palet om je patroon te creëren",
     "beadsTitle": "Ontwerp Je Kralenarmband",
     "beadsSubtitle": "Sleep kralen van het palet om je patroon te creëren",
+    "aiDesignTitle": "AI Ontwerp Assistent",
+    "aiDesignDescription": "Upload een foto van je outfit en krijg 3 kleur-gecoördineerde ontwerpen",
+    "skipPhotoUpload": "Overslaan en zelf ontwerpen",
     "beadsPalette": "Kralen Palet",
     "beads": "kralen",
     "clickToPlace": "Klik op posities om geselecteerde kraal te plaatsen",
@@ -532,5 +535,23 @@
       "startDesigning": "Start Ontwerpen",
       "browseBracelets": "Bekijk Armbanden"
     }
+  },
+  "photoUpload": {
+    "uploadTitle": "Upload een foto van je outfit",
+    "uploadDescription": "Sleep een foto hierheen of klik om te selecteren",
+    "uploadLimit": "PNG, JPG, WEBP tot 10MB",
+    "analyzing": "AI analyseert je foto...",
+    "analyzingDescription": "We zoeken de mooiste kleuren voor je armband",
+    "error": "Fout bij het uploaden van de foto",
+    "invalidFile": "Selecteer een geldige afbeelding",
+    "fileTooLarge": "Afbeelding moet kleiner zijn dan 10MB"
+  },
+  "suggestions": {
+    "title": "AI Ontwerp Suggesties",
+    "description": "Kies een ontwerp dat bij je foto past",
+    "selectButton": "Gebruik dit ontwerp",
+    "info": "Na het kiezen kun je het ontwerp nog aanpassen",
+    "noSuggestions": "Geen suggesties gevonden",
+    "tryAgain": "Probeer een andere foto"
   }
 }

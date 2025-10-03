@@ -5,6 +5,8 @@ import Image from "next/image";
 import { PrimaryButton, SecondaryButton } from "@/components/ui/Button";
 import { LoadingSpinner, Alert, Card, CardContent, CardHeader } from "@/components/ui/Common";
 import { addToCart } from "@/lib/cart";
+import PhotoUpload, { DesignSuggestion } from "./PhotoUpload";
+import SuggestionsPanel from "./SuggestionsPanel";
 
 import { useTranslations } from 'next-intl';
 
@@ -63,6 +65,11 @@ export default function BeadsDesigner({ braceletSlug, beadSize, braceletLength }
   // Pattern generation state
   const [isGenerating, setIsGenerating] = useState(false);
   const [patternMode, setPatternMode] = useState<'manual' | 'pattern'>('manual');
+  
+  // Photo upload and AI suggestions state
+  const [showPhotoUpload, setShowPhotoUpload] = useState(true);
+  const [suggestions, setSuggestions] = useState<DesignSuggestion[]>([]);
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
   // Calculate how many beads fit on the bracelet
   const maxBeads = Math.floor(braceletLength / (beadSize + 1)); // +1 for spacing
@@ -371,6 +378,49 @@ export default function BeadsDesigner({ braceletSlug, beadSize, braceletLength }
     console.log('✅ Bead placement complete');
   }, [selectedBead, beads, saveState]);
 
+  // Handle photo analysis complete
+  const handleAnalysisComplete = useCallback((newSuggestions: DesignSuggestion[]) => {
+    console.log('✅ Photo analysis complete:', newSuggestions);
+    setSuggestions(newSuggestions);
+    setShowSuggestions(true);
+    setShowPhotoUpload(false);
+  }, []);
+
+  // Handle photo upload error
+  const handlePhotoError = useCallback((errorMessage: string) => {
+    setError(errorMessage);
+    setTimeout(() => setError(null), 5000);
+  }, []);
+
+  // Handle suggestion selection
+  const handleSelectSuggestion = useCallback((suggestion: DesignSuggestion) => {
+    console.log('🎨 Selected suggestion:', suggestion);
+    
+    // Save current state
+    saveState();
+    
+    // Create placements based on the suggestion's bead IDs
+    const newPlacements: BeadPlacement[] = suggestion.beadIds.map((beadId, index) => ({
+      id: `placement-${Date.now()}-${index}`,
+      beadId,
+      position: index,
+      quantity: 1,
+    }));
+    
+    setPlacements(newPlacements);
+    setShowSuggestions(false);
+    setShowPhotoUpload(false);
+    
+    // Scroll to the canvas
+    canvasRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, [saveState]);
+
+  // Handle close suggestions
+  const handleCloseSuggestions = useCallback(() => {
+    setShowSuggestions(false);
+    setShowPhotoUpload(true);
+  }, []);
+
   // Calculate total price
   const calculatePrice = () => {
     const beadCosts = placements.reduce((total, placement) => {
@@ -410,7 +460,55 @@ export default function BeadsDesigner({ braceletSlug, beadSize, braceletLength }
             <p className="text-gray-600 mb-4">
               {t('beadsSubtitle', { default: 'Drag beads from the palette to create your pattern' })}
             </p>
-            
+          </div>
+          
+          {/* Photo Upload Section */}
+          {showPhotoUpload && placements.length === 0 && (
+            <div className="mb-8">
+              <Card>
+                <CardHeader>
+                  <div className="text-center">
+                    <h2 className="text-xl font-semibold text-gray-900 mb-2">
+                      🎨 {t('aiDesignTitle', { default: 'AI Design Assistant' })}
+                    </h2>
+                    <p className="text-sm text-gray-600">
+                      {t('aiDesignDescription', { default: 'Upload een foto van je outfit en krijg 3 kleur-gecoördineerde ontwerpen' })}
+                    </p>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <PhotoUpload
+                    onAnalysisComplete={handleAnalysisComplete}
+                    onError={handlePhotoError}
+                  />
+                  
+                  <div className="mt-4 text-center">
+                    <button
+                      onClick={() => setShowPhotoUpload(false)}
+                      className="text-sm text-gray-500 hover:text-gray-700 underline"
+                    >
+                      {t('skipPhotoUpload', { default: 'Overslaan en zelf ontwerpen' })}
+                    </button>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          )}
+          
+          {/* AI Suggestions Panel */}
+          {showSuggestions && suggestions.length > 0 && (
+            <div className="mb-8">
+              <SuggestionsPanel
+                suggestions={suggestions}
+                onSelectSuggestion={handleSelectSuggestion}
+                onClose={handleCloseSuggestions}
+              />
+            </div>
+          )}
+          
+          {/* Show manual design section only when not showing photo upload or suggestions */}
+          {(!showPhotoUpload || placements.length > 0) && !showSuggestions && (
+            <>
             {/* Controls Bar */}
             <div className="flex flex-wrap items-center justify-center gap-3 mb-4">
               <div className="flex items-center gap-2 bg-white rounded-lg px-4 py-2 shadow-sm border">
@@ -508,7 +606,6 @@ export default function BeadsDesigner({ braceletSlug, beadSize, braceletLength }
                 {showPatternPreview ? t('hidePreview', { default: 'Hide Preview' }) : t('showPreview', { default: 'Show Preview' })}
               </button>
             </div>
-          </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
             
@@ -1105,6 +1202,8 @@ export default function BeadsDesigner({ braceletSlug, beadSize, braceletLength }
 
             </div>
           </div>
+          </>
+          )}
         </div>
       </div>
     </div>
